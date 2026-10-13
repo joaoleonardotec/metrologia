@@ -126,7 +126,7 @@
         .badge-success { background-color: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
         .badge-inactive { background-color: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
 
-        /* FAIXAS ESTILO EXATO DA SUA IMAGEM */
+        /* FAIXAS ESTILO ARKMEDS */
         .faixa-container { 
             border: 1.5px dashed var(--ark-purple); 
             border-radius: 12px; 
@@ -186,7 +186,8 @@
     <!-- SIDEBAR -->
     <aside>
         <div class="sidebar-brand">
-            <span style="font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#a78bfa;">Portal Lab</span></span>
+            <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#a78bfa;">Portal Lab</span></span>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-item active" id="menu-dashboard"><a href="javascript:void(0)" onclick="switchTab('dashboard')">📊 Visão Geral</a></li>
@@ -284,7 +285,7 @@
                     </div>
                 </div>
 
-                <!-- FAIXAS DE MEDIÇÃO & RESULTADOS (EXATO DA SUA IMAGEM) -->
+                <!-- FAIXAS DE MEDIÇÃO & RESULTADOS -->
                 <div class="section-header-banner" style="background-color:var(--ark-purple);"><span>FAIXAS DE MEDIÇÃO & RESULTADOS</span></div>
                 <div class="section-box" style="background:#f8fafc;">
                     <div id="faixas-wrapper">
@@ -342,7 +343,7 @@
                                 </div>
                             </div>
 
-                            <!-- LAYOUT LADO A LADO: MEDIÇÕES X RESULTADOS (EXATAMENTE COMO NA SUA IMAGEM) -->
+                            <!-- LAYOUT LADO A LADO: MEDIÇÕES X RESULTADOS -->
                             <div class="grid-medicoes-resultados">
                                 <div class="box-medicoes">
                                     <div class="box-title">Medições</div>
