@@ -37,7 +37,7 @@
 
         /* ================= SIDEBAR ================= */
         aside {
-            width: 280px;
+            width: 320px; /* Aumentado para acomodar a logo grande */
             background-color: var(--sidebar-bg);
             color: #fff;
             display: flex;
@@ -46,45 +46,47 @@
             z-index: 10;
         }
 
+        /* ÁREA DA LOGO (3x A 4x MAIOR) */
         .sidebar-brand {
-            padding: 15px;
+            padding: 20px 15px;
             background-color: #141923;
             border-bottom: 1px solid #2d3748;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 90px;
+            min-height: 200px; /* Espaço expandido */
         }
 
         .sidebar-brand img {
             width: 100%;
             height: auto;
-            max-height: 80px;
+            max-height: 240px; /* Logo 3x a 4x maior */
             object-fit: contain;
+            display: block;
         }
 
         .sidebar-menu {
             list-style: none;
-            padding: 20px 0;
+            padding: 15px 0;
             flex-grow: 1;
             overflow-y: auto;
         }
 
         .sidebar-menu li {
             margin-bottom: 4px;
-            cursor: pointer;
         }
 
         .sidebar-menu a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 20px;
+            padding: 14px 22px;
             color: #a0aec0;
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .sidebar-menu a:hover, .sidebar-menu li.active a {
@@ -144,7 +146,7 @@
         }
 
         .tab-content.active {
-            display: block;
+            display: block !important;
         }
 
         .metrics-grid {
@@ -321,7 +323,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* LAYOUT IMPRESSÃO DO CERTIFICADO */
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
@@ -341,16 +342,16 @@
     <!-- SIDEBAR -->
     <aside>
         <div class="sidebar-brand">
-            <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
-            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.2rem; color:#fff;">Metrologia <span style="color:#63b3ed;">Lab</span></span>
+            <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="tratarErroLogo(this)">
+            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.4rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#63b3ed;">Lab Portal</span></span>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-item active" onclick="switchTab('dashboard', this)"><a href="#">📊 Visão Geral</a></li>
-            <li class="menu-item" onclick="switchTab('certificados', this)"><a href="#">📜 Certificados de Calibração</a></li>
-            <li class="menu-item" onclick="switchTab('padroes', this)"><a href="#">⚖️ Padrões (Rastreabilidade)</a></li>
-            <li class="menu-item" onclick="switchTab('clientes', this)"><a href="#">🏢 Clientes & Unidades</a></li>
-            <li class="menu-item" onclick="switchTab('procedimentos', this)"><a href="#">📋 Procedimentos (ISO 17025)</a></li>
-            <li class="menu-item" onclick="switchTab('configuracoes', this)"><a href="#">⚙️ Configurações</a></li>
+            <li class="menu-item active"><a href="javascript:void(0)" onclick="switchTab('dashboard', this.parentElement)">📊 Visão Geral</a></li>
+            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('certificados', this.parentElement)">📜 Certificados de Calibração</a></li>
+            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('padroes', this.parentElement)">⚖️ Padrões (Rastreabilidade)</a></li>
+            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('clientes', this.parentElement)">🏢 Clientes & Unidades</a></li>
+            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('procedimentos', this.parentElement)">📋 Procedimentos (ISO 17025)</a></li>
+            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('configuracoes', this.parentElement)">⚙️ Configurações</a></li>
         </ul>
     </aside>
 
@@ -477,7 +478,7 @@
                 </div>
             </div>
 
-            <!-- ABA 4: CLIENTES (CRUD COMPLETO) -->
+            <!-- ABA 4: CLIENTES -->
             <div id="clientes" class="tab-content">
                 <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
                     <h3>Cadastro e Gestão de Empresas Clientes</h3>
@@ -695,7 +696,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE VISUALIZAÇÃO / IMPRESSÃO DO CERTIFICADO -->
+    <!-- MODAL DE VISUALIZAÇÃO / IMPRESSÃO -->
     <div class="modal-overlay" id="modal-view-cert">
         <div class="modal-body" style="max-width: 900px;">
             <div class="no-print" style="margin-bottom: 20px; display: flex; justify-content: space-between;">
@@ -758,8 +759,21 @@
         </div>
     </div>
 
-    <!-- LOGICA JAVASCRIPT -->
+    <!-- SCRIPT DE NAVEGAÇÃO E SISTEMA -->
     <script>
+        // LOGO TRATAMENTO DE ERRO DE EXTENSÃO
+        function tratarErroLogo(img) {
+            const ext = ['logo.PNG', 'logo.jpg', 'logo.JPG', 'logo.jpeg'];
+            let atual = img.getAttribute('data-try') || 0;
+            if (atual < ext.length) {
+                img.setAttribute('data-try', parseInt(atual) + 1);
+                img.src = ext[atual];
+            } else {
+                img.style.display = 'none';
+                document.getElementById('logo-fallback').style.display = 'block';
+            }
+        }
+
         // BASE DE DADOS EM MEMÓRIA
         let clientesBD = [
             { id: 1, rsocial: 'Hospital Santa Clara', fantasia: 'Santa Clara', cnpj: '00.123.456/0001-99', ie: '109.223.112', responsavel: 'Dr. Roberto', cargo: 'Eng. Clínico', telefone: '(16) 99812-4433', email: 'engenharia@santaclara.com', endereco: 'Av. Paulista, 1000 - São Paulo/SP' },
@@ -771,19 +785,31 @@
             { num: 'CERT-2026-088', cliente: 'Indústria Metalúrgica Alfa Ltda', equip: 'Paquímetro Digital', marca: 'Mitutoyo', serie: 'MIT-1102', data: '10/10/2026', validade: '10/10/2027', padrao: 'PAD-PRS-04 - Manômetro Padrão', incerteza: '± 0,02 mm', status: 'Aprovado' }
         ];
 
-        // INICIALIZAÇÃO
         window.onload = function() {
             renderTabelaClientes();
             renderTabelasCertificados();
         };
 
-        // ALTERNÂNCIA DE ABAS
+        // NAVEGAÇÃO ENTRE ABAS
         function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu li').forEach(i => i.classList.remove('active'));
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
 
-            document.getElementById(tabId).classList.add('active');
-            if(element) element.classList.add('active');
+            const items = document.querySelectorAll('.sidebar-menu li');
+            items.forEach(item => item.classList.remove('active'));
+
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.style.display = 'block';
+            }
+
+            if (element) {
+                element.classList.add('active');
+            }
 
             const titles = {
                 'dashboard': 'Painel de Controle',
@@ -930,7 +956,7 @@
             }
         }
 
-        // --- EMISSÃO E GESTÃO DE CERTIFICADOS ---
+        // --- CERTIFICADOS ---
         function atualizarSelectClientesCertificado() {
             const select = document.getElementById('cert-cliente-select');
             select.innerHTML = '';
@@ -966,4 +992,68 @@
             document.getElementById('metric-cert-count').innerText = certificadosBD.length;
         }
 
-        function openModal
+        function openModalCertificado() {
+            document.getElementById('modal-cert').style.display = 'flex';
+        }
+
+        function closeModalCertificado() {
+            document.getElementById('modal-cert').style.display = 'none';
+        }
+
+        function salvarEEmitirCertificado() {
+            const cliente = document.getElementById('cert-cliente-select').value;
+            const equip = document.getElementById('cert-equip').value;
+            const marca = document.getElementById('cert-marca').value;
+            const serie = document.getElementById('cert-serie').value;
+            const data = document.getElementById('cert-data').value;
+            const padrao = document.getElementById('cert-padrao').value;
+            const incerteza = document.getElementById('cert-incerteza').value;
+            const status = document.getElementById('cert-status').value;
+
+            if(!equip || !serie) {
+                alert('Preencha os dados do equipamento.');
+                return;
+            }
+
+            const novoNum = `CERT-2026-0${certificadosBD.length + 90}`;
+            
+            certificadosBD.unshift({
+                num: novoNum,
+                cliente: cliente,
+                equip: equip,
+                marca: marca,
+                serie: serie,
+                data: data,
+                validade: '13/10/2027',
+                padrao: padrao,
+                incerteza: incerteza || '± 0,01',
+                status: status
+            });
+
+            renderTabelasCertificados();
+            closeModalCertificado();
+            alert('Certificado de Calibração gerado com sucesso!');
+        }
+
+        function visualizarCertificado(index) {
+            const cert = certificadosBD[index];
+            document.getElementById('view-cert-num').innerText = cert.num;
+            document.getElementById('view-cert-data').innerText = cert.data;
+            document.getElementById('view-cert-cliente').innerText = cert.cliente;
+            document.getElementById('view-cert-equip').innerText = cert.equip;
+            document.getElementById('view-cert-marca').innerText = cert.marca;
+            document.getElementById('view-cert-serie').innerText = cert.serie;
+            document.getElementById('view-cert-validade').innerText = cert.validade;
+            document.getElementById('view-cert-padrao').innerText = `Padrão Utilizado: ${cert.padrao}`;
+            document.getElementById('view-cert-incerteza').innerText = cert.incerteza;
+            document.getElementById('view-cert-status-text').innerText = cert.status;
+
+            document.getElementById('modal-view-cert').style.display = 'flex';
+        }
+
+        function closeModalViewCert() {
+            document.getElementById('modal-view-cert').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
