@@ -9,6 +9,7 @@
             --primary-purple: #5b3cf5;
             --primary-purple-hover: #482cd4;
             --light-purple: #f0ecff;
+            --primary-blue: #0056b3;
             --sidebar-bg: #1a202c;
             --sidebar-hover: #2d3748;
             --main-bg: #f8fafc;
@@ -16,7 +17,6 @@
             --text-main: #334155;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --input-bg: #ffffff;
         }
 
         * {
@@ -34,9 +34,9 @@
             overflow: hidden;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR DE NAVEGAÇÃO */
         aside {
-            width: 300px;
+            width: 310px;
             background-color: var(--sidebar-bg);
             color: #fff;
             display: flex;
@@ -69,14 +69,18 @@
             overflow-y: auto;
         }
 
+        .sidebar-menu li {
+            margin-bottom: 2px;
+        }
+
         .sidebar-menu a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 22px;
+            padding: 13px 20px;
             color: #a0aec0;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 500;
             transition: all 0.2s;
             cursor: pointer;
@@ -88,7 +92,7 @@
             border-left: 5px solid var(--primary-purple);
         }
 
-        /* MAIN CONTENT */
+        /* ÁREA PRINCIPAL */
         main {
             flex-grow: 1;
             display: flex;
@@ -117,7 +121,7 @@
             display: block !important;
         }
 
-        /* FORMULÁRIO ESTILO ARKMEDS */
+        /* ESTILO FORMULÁRIO ARKMEDS */
         .section-header-banner {
             background-color: var(--primary-purple);
             color: #fff;
@@ -154,7 +158,6 @@
         .form-field {
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
         .form-field label {
@@ -171,13 +174,7 @@
             font-size: 0.9rem;
             color: var(--text-main);
             outline: none;
-            transition: border-color 0.2s;
             background-color: #fff;
-        }
-
-        .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 3px rgba(91, 60, 245, 0.1);
         }
 
         .sub-info {
@@ -186,7 +183,7 @@
             margin-top: 4px;
         }
 
-        /* BOTÕES ESTILO ARKMEDS */
+        /* BOTÕES */
         .btn-purple {
             background-color: var(--primary-purple);
             color: #fff;
@@ -196,15 +193,9 @@
             font-weight: 600;
             font-size: 0.88rem;
             cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .btn-purple:hover {
-            background-color: var(--primary-purple-hover);
-        }
+        .btn-purple:hover { background-color: var(--primary-purple-hover); }
 
         .btn-outline-purple {
             background: transparent;
@@ -215,29 +206,25 @@
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .btn-outline-purple:hover {
-            background-color: var(--light-purple);
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
-        /* ESTRUTURA DE FAIXAS & MEDIÇÕES */
+        /* FAIXAS E MEDIÇÕES */
         .faixa-container {
             border: 1px dashed var(--primary-purple);
             border-radius: 8px;
             padding: 20px;
             background-color: #fafafa;
             margin-top: 15px;
-        }
-
-        .faixa-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-weight: 600;
-            color: #1e293b;
         }
 
         .grid-medicoes {
@@ -253,13 +240,6 @@
             padding: 20px;
         }
 
-        .box-title {
-            text-align: center;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 15px;
-        }
-
         .medicao-row {
             display: flex;
             gap: 10px;
@@ -273,12 +253,13 @@
             border: 1px solid #cbd5e1;
         }
 
-        /* TABELAS GERAIS */
+        /* TABELAS */
         .card-table {
             background-color: #fff;
             border-radius: 8px;
             border: 1px solid var(--border-color);
             overflow: hidden;
+            margin-top: 15px;
         }
 
         table {
@@ -307,33 +288,4 @@
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <aside>
-        <div class="sidebar-brand">
-            <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
-            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#a5b4fc;">Portal Lab</span></span>
-        </div>
-        <ul class="sidebar-menu">
-            <li class="menu-item active"><a href="javascript:void(0)" onclick="switchTab('dashboard', this.parentElement)">📊 Visão Geral</a></li>
-            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('cadastrar-instrumento', this.parentElement)">➕ Cadastrar Instrumento / Calibrar</a></li>
-            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('certificados', this.parentElement)">📜 Certificados Emitidos</a></li>
-            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('clientes', this.parentElement)">🏢 Clientes & Empresas</a></li>
-            <li class="menu-item"><a href="javascript:void(0)" onclick="switchTab('configuracoes', this.parentElement)">⚙️ Configurações</a></li>
-        </ul>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main>
-        <header>
-            <div style="display:flex; align-items:center; gap:10px; color:var(--text-muted); font-size:0.85rem;">
-                🏠 Dashboard &gt; Instrumentos &gt; <strong style="color:var(--primary-purple);" id="breadcrumb-title">Cadastrar Instrumento</strong>
-            </div>
-            <div style="font-weight:600; font-size:0.9rem;">Laboratório Central</div>
-        </header>
-
-        <div class="content-body">
-            
-            <!-- ABA 1: VISÃO GERAL -->
-            <div id="dashboard" class="tab-content">
-                <h2 style="margin-bottom:20px;">Painel Geral de Metrologia</h2>
-                <div class="card-table
+    <!-- SIDEBAR DE NAVEGAÇÃO -->
