@@ -45,19 +45,18 @@
         }
 
         .sidebar-brand {
-            padding: 25px 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 20px;
             border-bottom: 1px solid #2d3748;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
         }
 
-        .sidebar-brand span {
-            color: #63b3ed;
+        /* ESTILO DA IMAGEM DA LOGO */
+        .sidebar-brand img {
+            max-width: 100%;
+            max-height: 50px;
+            object-fit: contain;
         }
 
         .sidebar-menu {
@@ -68,6 +67,7 @@
 
         .sidebar-menu li {
             margin-bottom: 5px;
+            cursor: pointer;
         }
 
         .sidebar-menu a {
@@ -241,7 +241,6 @@
 
         .badge.success { background-color: #def7ec; color: #03543f; }
         .badge.warning { background-color: #fef08a; color: #713f12; }
-        .badge.danger { background-color: #fde8e8; color: #9b1c1c; }
 
         /* Formulários nas Configurações e Cadastros */
         .form-grid {
@@ -252,6 +251,7 @@
             padding: 30px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -277,9 +277,13 @@
             font-size: 0.95rem;
         }
 
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-blue);
+        .input-btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-btn-group input {
+            flex-grow: 1;
         }
     </style>
 </head>
@@ -288,15 +292,17 @@
     <!-- SIDEBAR DE NAVEGAÇÃO -->
     <aside>
         <div class="sidebar-brand">
-            Metrologia <span>Lab</span>
+            <!-- COLOQUE O NOME DO SEU ARQUIVO DE LOGO AQUI (EX: logo.png) -->
+            <img src="logo.png" alt="Logo da Empresa" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.2rem; color:#fff;">Metrologia <span style="color:#63b3ed;">Lab</span></span>
         </div>
         <ul class="sidebar-menu">
-            <li class="active" onclick="switchTab('dashboard', event)"><a href="#">📊 Visão Geral</a></li>
-            <li onclick="switchTab('certificados', event)"><a href="#">📜 Certificados</a></li>
-            <li onclick="switchTab('padroes', event)"><a href="#">⚖️ Padrões (Rastreabilidade)</a></li>
-            <li onclick="switchTab('clientes', event)"><a href="#">🏢 Clientes & Equipamentos</a></li>
-            <li onclick="switchTab('procedimentos', event)"><a href="#">📋 Procedimentos (ISO 17025)</a></li>
-            <li onclick="switchTab('configuracoes', event)"><a href="#">⚙️ Configurações</a></li>
+            <li class="menu-item active" onclick="switchTab('dashboard', this)"><a href="#">📊 Visão Geral</a></li>
+            <li class="menu-item" onclick="switchTab('certificados', this)"><a href="#">📜 Certificados</a></li>
+            <li class="menu-item" onclick="switchTab('padroes', this)"><a href="#">⚖️ Padrões (Rastreabilidade)</a></li>
+            <li class="menu-item" onclick="switchTab('clientes', this)"><a href="#">🏢 Clientes & Equipamentos</a></li>
+            <li class="menu-item" onclick="switchTab('procedimentos', this)"><a href="#">📋 Procedimentos (ISO 17025)</a></li>
+            <li class="menu-item" onclick="switchTab('configuracoes', this)"><a href="#">⚙️ Configurações</a></li>
         </ul>
     </aside>
 
@@ -317,7 +323,7 @@
 
         <div class="content-body">
             
-            <!-- AB 1: VISÃO GERAL (DASHBOARD) -->
+            <!-- ABA 1: VISÃO GERAL (DASHBOARD) -->
             <div id="dashboard" class="tab-content active">
                 <div class="metrics-grid">
                     <div class="metric-card">
@@ -330,7 +336,7 @@
                     </div>
                     <div class="metric-card">
                         <span>Clientes Ativos</span>
-                        <h3>45</h3>
+                        <h3 id="metric-clientes">2</h3>
                     </div>
                     <div class="metric-card">
                         <span>Equipamentos Pendentes</span>
@@ -341,7 +347,7 @@
                 <div class="card-table">
                     <div class="table-header">
                         <h3>Últimos Certificados Emitidos</h3>
-                        <button class="btn-primary" onclick="switchTab('certificados', event)">Ver Todos</button>
+                        <button class="btn-primary" onclick="switchTabDirect('certificados')">Ver Todos</button>
                     </div>
                     <table>
                         <thead>
@@ -368,19 +374,12 @@
                                 <td>10/10/2026</td>
                                 <td><span class="badge success">Aprovado</span></td>
                             </tr>
-                            <tr>
-                                <td>CERT-2026-087</td>
-                                <td>Clínica Radiológica Beta</td>
-                                <td>Termohigrômetro (SN: 4501)</td>
-                                <td>09/10/2026</td>
-                                <td><span class="badge warning">Restrição</span></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- AB 2: CERTIFICADOS -->
+            <!-- ABA 2: CERTIFICADOS -->
             <div id="certificados" class="tab-content">
                 <div class="card-table">
                     <div class="table-header">
@@ -417,7 +416,7 @@
                 </div>
             </div>
 
-            <!-- AB 3: PADRÕES (RASTREABILIDADE) -->
+            <!-- ABA 3: PADRÕES -->
             <div id="padroes" class="tab-content">
                 <div class="card-table">
                     <div class="table-header">
@@ -429,7 +428,7 @@
                             <tr>
                                 <th>Descrição do Padrão</th>
                                 <th>Certificado de Rastreabilidade</th>
-                                <th>Validade do Calibração</th>
+                                <th>Validade da Calibração</th>
                                 <th>Laboratório Calibrador</th>
                             </tr>
                         </thead>
@@ -451,41 +450,79 @@
                 </div>
             </div>
 
-            <!-- AB 4: CLIENTES -->
+            <!-- ABA 4: CLIENTES (COM FORMULÁRIO CNPJ E TABELA) -->
             <div id="clientes" class="tab-content">
-                <div class="card-table">
-                    <div class="table-header">
-                        <h3>Base de Clientes e Equipamentos Vinculados</h3>
-                        <button class="btn-primary">+ Novo Cliente</button>
+                
+                <!-- BOTÃO DE EXIBIR FORMULÁRIO -->
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <h3>Base de Clientes</h3>
+                    <button class="btn-primary" onclick="toggleFormCliente()">+ Novo Cliente (Busca por CNPJ)</button>
+                </div>
+
+                <!-- FORMULÁRIO DE CADASTRO (INICIALMENTE OCULTO) -->
+                <div id="form-cliente-container" style="display: none;" class="form-grid">
+                    <div class="form-group full">
+                        <h4 style="color: var(--primary-blue);">Cadastrar Novo Cliente via Receita Federal</h4>
                     </div>
+                    <div class="form-group full">
+                        <label>CNPJ (Apenas Números)</label>
+                        <div class="input-btn-group">
+                            <input type="text" id="cnpj-input" placeholder="Ex: 00123456000199">
+                            <button type="button" class="btn-primary" onclick="consultarCNPJ()">Buscar CNPJ</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Razão Social</label>
+                        <input type="text" id="rsocial-input" placeholder="Razão social preenchida automaticamente">
+                    </div>
+                    <div class="form-group">
+                        <label>Nome Fantasia</label>
+                        <input type="text" id="fantasia-input" placeholder="Nome fantasia">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail de Contato</label>
+                        <input type="email" id="email-input" placeholder="contato@empresa.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Endereço / Cidade / UF</label>
+                        <input type="text" id="endereco-input" placeholder="Endereço completo">
+                    </div>
+                    <div class="form-group full">
+                        <button type="button" class="btn-primary" onclick="salvarCliente()">Salvar Cliente</button>
+                        <button type="button" style="background:#6c757d; color:#fff; border:none; padding:8px 16px; border-radius:5px; cursor:pointer;" onclick="toggleFormCliente()">Cancelar</button>
+                    </div>
+                </div>
+
+                <!-- TABELA DE CLIENTES -->
+                <div class="card-table">
                     <table>
                         <thead>
                             <tr>
                                 <th>Empresa / Cliente</th>
                                 <th>CNPJ</th>
                                 <th>Contato Responsável</th>
-                                <th>Equipamentos Cadastrados</th>
+                                <th>Localização</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tabela-clientes-body">
                             <tr>
                                 <td>Hospital Santa Clara</td>
                                 <td>00.123.456/0001-99</td>
                                 <td>engenharia@santaclara.com</td>
-                                <td>14 equipamentos</td>
+                                <td>São Paulo - SP</td>
                             </tr>
                             <tr>
                                 <td>Indústria Metalúrgica Alfa</td>
                                 <td>11.987.654/0001-22</td>
                                 <td>qualidade@alfa.com.br</td>
-                                <td>32 equipamentos</td>
+                                <td>Campinas - SP</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- AB 5: PROCEDIMENTOS -->
+            <!-- ABA 5: PROCEDIMENTOS -->
             <div id="procedimentos" class="tab-content">
                 <div class="card-table">
                     <div class="table-header">
@@ -505,7 +542,7 @@
                             <tr>
                                 <td>POP-MET-012</td>
                                 <td>Calibração de Instrumentos de Pressão (Manômetros)</td>
-                                <span>Rev. 03</span>
+                                <td>Rev. 03</td>
                                 <td><span class="badge success">Vigente</span></td>
                             </tr>
                             <tr>
@@ -519,7 +556,7 @@
                 </div>
             </div>
 
-            <!-- AB 6: CONFIGURAÇÕES -->
+            <!-- ABA 6: CONFIGURAÇÕES -->
             <div id="configuracoes" class="tab-content">
                 <div class="form-grid">
                     <div class="form-group full">
@@ -550,28 +587,27 @@
         </div>
     </main>
 
-    <!-- SCRIPT DE NAVEGAÇÃO ENTRE ABAS -->
+    <!-- SCRIPTS LÓGICOS DE FUNCIONAMENTO -->
     <script>
-        function switchTab(tabId, event) {
-            if(event) event.preventDefault();
-
+        // 1. ALTERNÂNCIA DE ABAS
+        function switchTab(tabId, element) {
             // Oculta todas as abas
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Remove a classe active de todos os menus
+            // Remove o destaque dos botões do menu
             const menuItems = document.querySelectorAll('.sidebar-menu li');
             menuItems.forEach(item => item.classList.remove('active'));
 
-            // Exibe a aba selecionada
+            // Exibe a aba clicada
             document.getElementById(tabId).classList.add('active');
 
-            // Ativa o item correspondente no menu lateral
-            if(event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
+            // Destaca o item do menu clicado
+            if(element) {
+                element.classList.add('active');
             }
 
-            // Atualiza o título do cabeçalho de acordo com a aba
+            // Atualiza o título no topo
             const titles = {
                 'dashboard': 'Painel de Controle',
                 'certificados': 'Gestão de Certificados',
@@ -581,6 +617,87 @@
                 'configuracoes': 'Configurações do Sistema'
             };
             document.getElementById('page-title').innerText = titles[tabId] || 'Sistema';
+        }
+
+        function switchTabDirect(tabId) {
+            const items = document.querySelectorAll('.sidebar-menu li');
+            const tabMap = ['dashboard', 'certificados', 'padroes', 'clientes', 'procedimentos', 'configuracoes'];
+            const index = tabMap.indexOf(tabId);
+            if(index !== -1) {
+                switchTab(tabId, items[index]);
+            }
+        }
+
+        // 2. MOSTRAR/OCULTAR FORMULÁRIO DE CLIENTE
+        function toggleFormCliente() {
+            const form = document.getElementById('form-cliente-container');
+            form.style.display = form.style.display === 'none' ? 'grid' : 'none';
+        }
+
+        // 3. CONSULTA AUTOMÁTICA DE CNPJ VIA API PÚBLICA
+        function consultarCNPJ() {
+            let cnpj = document.getElementById('cnpj-input').value.replace(/\D/g, '');
+
+            if (cnpj.length !== 14) {
+                alert('Por favor, digite um CNPJ válido com 14 dígitos.');
+                return;
+            }
+
+            // Utiliza serviço JSONP público para contornar restrições de CORS
+            const script = document.createElement('script');
+            script.src = `https://receitaws.com.br/v1/cnpj/${cnpj}?callback=preencherCamposCNPJ`;
+            document.body.appendChild(script);
+        }
+
+        function preencherCamposCNPJ(dados) {
+            if (dados.status === "ERROR") {
+                alert('CNPJ não encontrado ou inválido: ' + dados.message);
+                return;
+            }
+
+            document.getElementById('rsocial-input').value = dados.nome || '';
+            document.getElementById('fantasia-input').value = dados.fantasia || dados.nome || '';
+            document.getElementById('email-input').value = dados.email || '';
+            document.getElementById('endereco-input').value = `${dados.logradouro || ''}, ${dados.numero || ''} - ${dados.municipio || ''}/${dados.uf || ''}`;
+        }
+
+        // 4. SALVAR CLIENTE NA TABELA
+        function salvarCliente() {
+            const rsocial = document.getElementById('rsocial-input').value;
+            const cnpj = document.getElementById('cnpj-input').value;
+            const email = document.getElementById('email-input').value;
+            const endereco = document.getElementById('endereco-input').value;
+
+            if(!rsocial || !cnpj) {
+                alert('Por favor, preencha pelo menos a Razão Social e o CNPJ.');
+                return;
+            }
+
+            const tbody = document.getElementById('tabela-clientes-body');
+            const newRow = `
+                <tr>
+                    <td>${rsocial}</td>
+                    <td>${cnpj}</td>
+                    <td>${email || 'Não informado'}</td>
+                    <td>${endereco || 'Não informado'}</td>
+                </tr>
+            `;
+
+            tbody.innerHTML += newRow;
+
+            // Atualizar contador do dashboard
+            const total = tbody.querySelectorAll('tr').length;
+            document.getElementById('metric-clientes').innerText = total;
+
+            // Limpar formulário e fechar
+            document.getElementById('cnpj-input').value = '';
+            document.getElementById('rsocial-input').value = '';
+            document.getElementById('fantasia-input').value = '';
+            document.getElementById('email-input').value = '';
+            document.getElementById('endereco-input').value = '';
+            toggleFormCliente();
+
+            alert('Cliente cadastrado com sucesso!');
         }
     </script>
 </body>
