@@ -6,8 +6,9 @@
     <title>Metrologia & Certificados - Portal Corporativo</title>
     <style>
         :root {
-            --primary-gray: #334155;
-            --primary-hover: #1e293b;
+            --primary-purple: #5b3cf5;
+            --primary-purple-hover: #482cd4;
+            --light-purple: #f0ecff;
             --sidebar-bg: #1a202c;
             --sidebar-hover: #2d3748;
             --main-bg: #f8fafc;
@@ -88,10 +89,10 @@
         .sidebar-menu a:hover, .sidebar-menu li.active a {
             background-color: var(--sidebar-hover);
             color: #fff;
-            border-left: 5px solid var(--primary-gray);
+            border-left: 5px solid var(--primary-purple);
         }
 
-        /* ÁREA PRINCIPAL */
+        /* MAIN CONTENT */
         main {
             flex-grow: 1;
             display: flex;
@@ -122,14 +123,14 @@
             display: block !important;
         }
 
-        /* COMPONENTES */
+        /* ESTILO ARKMEDS (BANNERS E CAIXAS) */
         .section-header-banner {
-            background-color: var(--primary-gray);
+            background-color: var(--primary-purple);
             color: #fff;
             padding: 12px 20px;
             border-radius: 6px 6px 0 0;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             display: flex;
@@ -185,8 +186,8 @@
         }
 
         /* BOTÕES */
-        .btn-gray {
-            background-color: var(--primary-gray);
+        .btn-purple {
+            background-color: var(--primary-purple);
             color: #fff;
             border: none;
             padding: 10px 22px;
@@ -197,12 +198,12 @@
             transition: background 0.2s;
         }
 
-        .btn-gray:hover { background-color: var(--primary-hover); }
+        .btn-purple:hover { background-color: var(--primary-purple-hover); }
 
-        .btn-outline-gray {
+        .btn-outline-purple {
             background: transparent;
-            color: var(--primary-gray);
-            border: 1.5px solid var(--primary-gray);
+            color: var(--primary-purple);
+            border: 1.5px solid var(--primary-purple);
             padding: 8px 18px;
             border-radius: 20px;
             font-weight: 600;
@@ -255,7 +256,7 @@
             font-weight: 700;
         }
 
-        /* MODAL PDF ESTILO OFICIAL */
+        /* MODAL PDF EXATO */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -270,7 +271,7 @@
             background: #fff;
             padding: 30px;
             border-radius: 10px;
-            max-width: 900px;
+            max-width: 950px;
             width: 95%;
             max-height: 92vh;
             overflow-y: auto;
@@ -299,7 +300,7 @@
     <aside>
         <div class="sidebar-brand">
             <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
-            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#cbd5e1;">Portal Lab</span></span>
+            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#a5b4fc;">Portal Lab</span></span>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-item active" id="menu-dashboard"><a href="javascript:void(0)" onclick="switchTab('dashboard')">📊 Visão Geral</a></li>
@@ -316,7 +317,7 @@
     <main>
         <header class="no-print">
             <div style="display:flex; align-items:center; gap:10px; color:var(--text-muted); font-size:0.85rem;">
-                🏠 Dashboard &gt; <strong style="color:var(--primary-gray);" id="breadcrumb-title">Visão Geral</strong>
+                🏠 Dashboard &gt; <strong style="color:var(--primary-purple);" id="breadcrumb-title">Visão Geral</strong>
             </div>
             <div style="font-weight:600; font-size:0.9rem;">Laboratório Central de Metrologia</div>
         </header>
@@ -343,57 +344,56 @@
                 </div>
             </div>
 
-            <!-- ABA 2: CADASTRAR INSTRUMENTO / CALIBRAR -->
+            <!-- ABA 2: CADASTRAR INSTRUMENTO / CALIBRAR (LAYOUT ARKMEDS COMPLETO) -->
             <div id="cadastrar-instrumento" class="tab-content">
                 <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-                    <span style="font-size:1.5rem; color:var(--primary-gray); cursor:pointer;" onclick="switchTab('dashboard')">←</span>
-                    <h2 style="color:var(--primary-gray);" id="form-inst-title">Cadastrar Instrumento / Calibrar</h2>
+                    <span style="font-size:1.5rem; color:var(--primary-purple); cursor:pointer;" onclick="switchTab('dashboard')">←</span>
+                    <h2 style="color:var(--primary-purple);" id="form-inst-title">Cadastrar Instrumento</h2>
                 </div>
 
                 <input type="hidden" id="edit-cert-id">
+
+                <!-- ATALHOS DE CÓPIA / CATÁLOGO -->
+                <div class="form-row" style="margin-bottom:20px;">
+                    <div style="background:#fff; padding:15px; border-radius:8px; border:1px solid var(--border-color); flex:1;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Preencher com dados de um instrumento existente</label>
+                        <select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Copiar de instrumento existente</option></select>
+                    </div>
+                    <div style="background:#fff; padding:15px; border-radius:8px; border:1px solid var(--border-color); flex:1; display:flex; gap:10px;">
+                        <div style="flex:1;"><label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Fabricante (catálogo)</label><select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Fabricante (catálogo)</option></select></div>
+                        <div style="flex:1;"><label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Instrumento (catálogo)</label><select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Instrumento (catálogo)</option></select></div>
+                    </div>
+                </div>
 
                 <!-- DADOS DO INSTRUMENTO -->
                 <div class="section-header-banner">DADOS DO INSTRUMENTO</div>
                 <div class="section-box">
                     <div class="form-row">
-                        <div class="form-field">
-                            <label>Empresa *</label>
-                            <select id="inst-empresa"></select>
-                        </div>
-                        <div class="form-field">
-                            <label>Setor</label>
-                            <select id="inst-setor"><option>Laboratório / Produção</option></select>
-                        </div>
-                        <div class="form-field">
-                            <label>Nome *</label>
-                            <input type="text" id="inst-nome" placeholder="Ex: Termômetro Infravermelho">
-                        </div>
+                        <div class="form-field"><label>Empresa *</label><select id="inst-empresa"></select></div>
+                        <div class="form-field"><label>Setor</label><select id="inst-setor"><option>Laboratório / Produção</option><option>Qualidade</option></select></div>
+                        <div class="form-field"><label>Subcontratação</label><select><option>Nenhum</option></select></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-field">
-                            <label>Identificação / TAG *</label>
-                            <input type="text" id="inst-tag" placeholder="Ex: TED-0021">
-                        </div>
-                        <div class="form-field">
-                            <label>Fabricante *</label>
-                            <input type="text" id="inst-fabricante" placeholder="Ex: EXBOM">
-                        </div>
-                        <div class="form-field">
-                            <label>Número de Série</label>
-                            <input type="text" id="inst-serie" placeholder="Ex: NC">
-                        </div>
+                        <div class="form-field"><input type="text" placeholder="Item da lista (orçamento)"><span class="sub-info">Sem vínculo com lista.</span></div>
+                        <div class="form-field"><input type="text" placeholder="Número"><span class="sub-info">Preenchido ao abrir instrumento salvo.</span></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-field">
-                            <label>Patrimônio</label>
-                            <input type="text" id="inst-patrimonio" placeholder="Ex: NC">
-                        </div>
-                        <div class="form-field">
-                            <label>Data da calibração *</label>
-                            <input type="date" id="inst-data" value="2026-10-13" onchange="calcularValidadeAutomatica()">
-                        </div>
+                        <div class="form-field"><label>Nome *</label><input type="text" id="inst-nome" placeholder="Ex: TERMOMETRO INFRAVERMELHO"></div>
+                        <div class="form-field"><label>Identificação do instrumento (TAG) *</label><input type="text" id="inst-tag" placeholder="Ex: TED-0021"></div>
+                        <div class="form-field"><label>Tipo de instrumento *</label><select><option>Temperatura</option><option>Pressão</option><option>Elétrica</option></select></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field"><label>Fabricante *</label><input type="text" id="inst-fabricante" placeholder="Ex: EXBOM"></div>
+                        <div class="form-field"><label>Modelo</label><input type="text" id="inst-modelo" placeholder="Ex: NC"></div>
+                        <div class="form-field"><label>Número de série</label><input type="text" id="inst-serie" placeholder="Ex: NC"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field"><label>Patrimônio</label><input type="text" id="inst-patrimonio" placeholder="Ex: NC"></div>
+                        <div class="form-field"><label>Localização</label><input type="text" id="inst-localizacao" placeholder="Ex: LATICÍNIO LARA / LABORATÓRIO"></div>
+                        <div class="form-field"><label>Sublocalização</label><input type="text" placeholder="Ex: Sala 01"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field"><label>Data da calibração *</label><input type="date" id="inst-data" value="2026-10-13" onchange="calcularValidadeAutomatica()"></div>
                         <div class="form-field">
                             <label>Validade (Período)</label>
                             <select id="inst-validade-periodo" onchange="calcularValidadeAutomatica()">
@@ -405,17 +405,7 @@
                                 <option value="custom">Personalizado</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>Data da Próxima Calibração (Validade)</label>
-                            <input type="date" id="inst-prox-data">
-                        </div>
-                        <div class="form-field">
-                            <label>Localização</label>
-                            <input type="text" id="inst-localizacao" placeholder="Ex: Laboratório Central">
-                        </div>
+                        <div class="form-field"><label>Validade (Próxima calibração)</label><input type="date" id="inst-prox-data"></div>
                     </div>
                 </div>
 
@@ -427,38 +417,46 @@
                     </label>
                 </div>
                 <div class="section-box">
-                    <textarea rows="3" id="inst-obs" style="width:100%; border-radius:8px; border:1px solid #cbd5e1; padding:10px;" placeholder="Observações e notas técnicas do certificado..."></textarea>
+                    <textarea rows="3" id="inst-obs" style="width:100%; border-radius:8px; border:1px solid #cbd5e1; padding:10px;" placeholder="Observações e notas técnicas..."></textarea>
                 </div>
+
+                <!-- MANUTENÇÃO -->
+                <div class="section-header-banner">
+                    <span>MANUTENÇÃO (PREVENTIVA E CORRETIVA)</span>
+                    <div>
+                        <button type="button" class="btn-outline-purple" style="color:#fff; border-color:#fff;" onclick="alert('Preventiva adicionada.')">Adicionar preventiva</button>
+                        <button type="button" class="btn-outline-purple" style="color:#fff; border-color:#fff;" onclick="alert('Corretiva adicionada.')">Adicionar corretiva</button>
+                    </div>
+                </div>
+                <div class="section-box"><p style="font-size:0.85rem; color:var(--text-muted);">Nenhuma manutenção registrada.</p></div>
 
                 <!-- CONDIÇÕES AMBIENTAIS -->
                 <div class="section-header-banner">CONDIÇÕES AMBIENTAIS</div>
                 <div class="section-box">
+                    <div class="form-field"><label>Padrão para temperatura e umidade</label><select><option>TILR0020 - Termohigrômetro Padrão</option></select></div>
                     <div class="form-row">
-                        <div class="form-field"><input type="text" id="temp-ini" placeholder="Temperatura inicial (°C)" value="27.1"><span class="sub-info">± 0.3 °C</span></div>
-                        <div class="form-field"><input type="text" id="temp-fim" placeholder="Temperatura final (°C)" value="27.1"><span class="sub-info">± 0.3 °C</span></div>
-                        <div class="form-field"><input type="text" id="umi-ini" placeholder="Umidade inicial (% RH)" value="65.8"><span class="sub-info">± 1.6 %</span></div>
-                        <div class="form-field"><input type="text" id="umi-fim" placeholder="Umidade final (% RH)" value="65.8"><span class="sub-info">± 1.6 %</span></div>
+                        <div class="form-field"><input type="text" id="temp-ini" value="27.1" placeholder="Temp inicial (°C)"><span class="sub-info">± 0.3 °C</span></div>
+                        <div class="form-field"><input type="text" id="temp-fim" value="27.1" placeholder="Temp final (°C)"><span class="sub-info">± 0.3 °C</span></div>
+                        <div class="form-field"><input type="text" id="umi-ini" value="65.8" placeholder="Umidade inicial (% RH)"><span class="sub-info">± 1.6 %</span></div>
+                        <div class="form-field"><input type="text" id="umi-fim" value="65.8" placeholder="Umidade final (% RH)"><span class="sub-info">± 1.6 %</span></div>
                     </div>
                 </div>
 
                 <!-- PROCEDIMENTOS (MÚLTIPLOS) -->
-                <div class="section-header-banner">PROCEDIMENTOS ISO 17025</div>
+                <div class="section-header-banner">PROCEDIMENTO</div>
                 <div class="section-box">
                     <div id="procedimentos-list" style="display:flex; flex-direction:column; gap:10px;">
                         <div class="form-row procedimento-row">
                             <div class="form-field" style="flex-grow:1;">
                                 <select class="proc-select">
-                                    <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES - Ver. 1.0</option>
-                                    <option>POP-MET-012 - Calibração de Pressão e Manômetros - Ver. 2.0</option>
-                                    <option>POP-MET-015 - Calibração de Multímetros Digitais - Ver. 1.2</option>
+                                    <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA - 1.0</option>
+                                    <option>POP-MET-012 - Calibração de Pressão e Manômetros - 2.0</option>
                                 </select>
                             </div>
-                            <button type="button" class="btn-outline-gray" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
+                            <button type="button" class="btn-outline-purple" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
                         </div>
                     </div>
-                    <div>
-                        <button type="button" class="btn-outline-gray" onclick="adicionarProcedimentoRow()">+ Adicionar outro procedimento</button>
-                    </div>
+                    <div><button type="button" class="btn-outline-purple" onclick="adicionarProcedimentoRow()">+ Adicionar procedimento</button></div>
                 </div>
 
                 <!-- BANCO DE UNIDADES POR ÁREA -->
@@ -467,12 +465,12 @@
                     <div class="form-row">
                         <div class="form-field">
                             <label>Área Metrológica</label>
-                            <select id=" unidade-area" onchange="atualizarListaUnidades()">
+                            <select id="unidade-area" onchange="atualizarListaUnidades()">
                                 <option value="Temperatura">Temperatura</option>
                                 <option value="Pressão">Pressão</option>
                                 <option value="Elétrica">Elétrica</option>
                                 <option value="Dimensional">Dimensional</option>
-                                <option value="Massa">Massa / Balanças</option>
+                                <option value="Massa">Massa</option>
                             </select>
                         </div>
                         <div class="form-field">
@@ -480,46 +478,45 @@
                             <select id="unidade-especifica">
                                 <option>°C (Grau Celsius)</option>
                                 <option>°F (Grau Fahrenheit)</option>
-                                <option>K (Kelvin)</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- FAIXAS & MEDIÇÕES -->
+                <!-- FAIXAS & RESULTADOS -->
                 <h3 style="margin-top:20px; margin-bottom:10px;">Faixas de Medição & Resultados</h3>
-                <div class="faixa-container" style="background:#fff; border:1px solid var(--border-color); padding:20px; border-radius:8px;">
-                    <div class="form-row" style="margin-bottom:12px;">
-                        <div class="form-field"><input type="text" id="faixa-min" placeholder="Mínima" value="-50.0"></div>
-                        <div class="form-field"><input type="text" id="faixa-max" placeholder="Máxima" value="330.0"></div>
-                        <div class="form-field"><input type="text" id="faixa-divisao" placeholder="Menor Divisão" value="0.1"></div>
-                        <div class="form-field"><input type="text" id="faixa-tolerancia" placeholder="Tolerância" value="±5 °C"></div>
+                <div class="section-box">
+                    <div class="form-row">
+                        <div class="form-field"><label>Mínima</label><input type="text" value="-50.0"></div>
+                        <div class="form-field"><label>Máxima</label><input type="text" value="330.0"></div>
+                        <div class="form-field"><label>Menor Divisão</label><input type="text" value="0.1"></div>
+                        <div class="form-field"><label>Tolerância</label><input type="text" value="±5 °C"></div>
                     </div>
 
-                    <div style="font-weight:600; margin-top:15px; margin-bottom:10px;">Tabela de Leituras (Referência x Leitura)</div>
+                    <div style="font-weight:600; margin-top:15px; margin-bottom:10px;">Tabela de Medições</div>
                     <div id="medicoes-list" style="display:flex; flex-direction:column; gap:8px;">
                         <div class="medicao-row form-row">
                             <input type="text" placeholder="Referência" class="calc-ref" value="-10.0">
-                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="-9.7">
+                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="-9.7">
                             <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.15">
                         </div>
                         <div class="medicao-row form-row">
                             <input type="text" placeholder="Referência" class="calc-ref" value="0.0">
-                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="-0.0">
+                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="-0.0">
                             <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.15">
                         </div>
                         <div class="medicao-row form-row">
                             <input type="text" placeholder="Referência" class="calc-ref" value="50.0">
-                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="50.0">
+                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="50.0">
                             <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.13">
                         </div>
                     </div>
-                    <button type="button" class="btn-outline-gray" style="margin-top:10px;" onclick="addMedicaoRow()">+ Adicionar ponto de medição</button>
+                    <button type="button" class="btn-outline-purple" style="margin-top:10px;" onclick="addMedicaoRow()">+ Adicionar medição</button>
                 </div>
 
                 <div style="display:flex; justify-content:flex-end; gap:15px; margin-top:30px;">
-                    <button type="button" class="btn-outline-gray" onclick="switchTab('dashboard')">Cancelar</button>
-                    <button type="button" class="btn-gray" onclick="salvarInstrumentoECertificado()">Salvar Instrumento & Emitir Certificado</button>
+                    <button type="button" class="btn-outline-purple" onclick="switchTab('dashboard')">Cancelar</button>
+                    <button type="button" class="btn-purple" onclick="salvarInstrumentoECertificado()">Salvar Instrumento & Emitir Certificado</button>
                 </div>
             </div>
 
@@ -527,7 +524,7 @@
             <div id="certificados" class="tab-content">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                     <h2>Certificados Emitidos</h2>
-                    <button class="btn-gray" onclick="novoRegistroCertificado()">+ Emitir Novo Certificado</button>
+                    <button class="btn-purple" onclick="novoRegistroCertificado()">+ Emitir Novo Certificado</button>
                 </div>
                 <div class="card-table">
                     <table>
@@ -560,18 +557,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>TILR0020</td>
-                                <td>Termohigrômetro Padrão (Temperatura, Umidade)</td>
-                                <td>148.677</td>
-                                <td>01/09/2028</td>
-                            </tr>
-                            <tr>
-                                <td>TILR0003</td>
-                                <td>Calibrador de Temperatura Padrão</td>
-                                <td>E32792/22</td>
-                                <td>20/08/2027</td>
-                            </tr>
+                            <tr><td>TILR0020</td><td>Termohigrômetro Padrão (Temperatura, Umidade)</td><td>148.677</td><td>01/09/2028</td></tr>
+                            <tr><td>TILR0003</td><td>Calibrador de Temperatura Padrão</td><td>E32792/22</td><td>20/08/2027</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -581,27 +568,22 @@
             <div id="clientes" class="tab-content">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                     <h2>Gestão de Clientes & Empresas</h2>
-                    <button class="btn-gray" onclick="toggleFormCliente(true)">+ Novo Cliente (Consulta CNPJ)</button>
+                    <button class="btn-purple" onclick="toggleFormCliente(true)">+ Novo Cliente (Consulta CNPJ)</button>
                 </div>
 
                 <div id="form-cliente-container" style="display:none; background:#fff; padding:20px; border-radius:8px; border:1px solid var(--border-color); margin-bottom:20px;">
-                    <h4 style="color:var(--primary-gray); margin-bottom:15px;">Cadastro via ReceitaWS</h4>
+                    <h4 style="color:var(--primary-purple); margin-bottom:15px;">Cadastro via ReceitaWS</h4>
                     <div class="form-row">
-                        <div class="form-field">
-                            <label>CNPJ (apenas números)</label>
-                            <input type="text" id="cnpj-input" placeholder="Ex: 38473112000132">
-                        </div>
-                        <div class="form-field" style="justify-content:flex-end;">
-                            <button type="button" class="btn-gray" onclick="consultarCNPJ()">Buscar ReceitaWS</button>
-                        </div>
+                        <div class="form-field"><label>CNPJ (apenas números)</label><input type="text" id="cnpj-input" placeholder="Ex: 38473112000132"></div>
+                        <div class="form-field" style="justify-content:flex-end;"><button type="button" class="btn-purple" onclick="consultarCNPJ()">Buscar ReceitaWS</button></div>
                     </div>
                     <div class="form-row" style="margin-top:10px;">
                         <div class="form-field"><label>Razão Social</label><input type="text" id="rsocial-input"></div>
-                        <div class="form-field"><label>Endereço Completo</label><input type="text" id="endereco-input" placeholder="Rua, Número, Cidade/UF"></div>
+                        <div class="form-field"><label>Endereço Completo</label><input type="text" id="endereco-input" placeholder="Avenida Paineiras, 2382 - Passos/MG"></div>
                     </div>
                     <div style="margin-top:15px; display:flex; gap:10px;">
-                        <button type="button" class="btn-gray" onclick="salvarCliente()">Salvar Cliente</button>
-                        <button type="button" class="btn-outline-gray" onclick="toggleFormCliente(false)">Cancelar</button>
+                        <button type="button" class="btn-purple" onclick="salvarCliente()">Salvar Cliente</button>
+                        <button type="button" class="btn-outline-purple" onclick="toggleFormCliente(false)">Cancelar</button>
                     </div>
                 </div>
 
@@ -627,16 +609,12 @@
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Descrição do Procedimento / Ensaio</th>
+                                <th>Descrição do Ensaio / Calibração</th>
                                 <th>Revisão</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>PCLR0080</td>
-                                <td>CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA</td>
-                                <td>1.0</td>
-                            </tr>
+                            <tr><td>PCLR0080</td><td>CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA</td><td>1.0</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -645,22 +623,21 @@
             <!-- ABA 7: CONFIGURAÇÕES -->
             <div id="configuracoes" class="tab-content">
                 <h2>Configurações do Laboratório</h2>
-                <p style="margin-top:10px; color:var(--text-muted);">Dados cadastrais, timbre e responsáveis técnicos.</p>
+                <p style="margin-top:10px; color:var(--text-muted);">Dados cadastrais, timbres e responsáveis técnicos.</p>
             </div>
 
         </div>
     </main>
 
-    <!-- MODAL DE VISUALIZAÇÃO / PDF EXATO (TEMA CINZA) -->
+    <!-- MODAL DE VISUALIZAÇÃO / PDF OFICIAL -->
     <div class="modal-overlay" id="modal-view-cert">
         <div class="modal-body" style="max-width: 950px;">
             <div class="no-print" style="margin-bottom:20px; display:flex; justify-content:space-between;">
-                <button type="button" class="btn-gray" onclick="window.print()">🖨️ Imprimir / Salvar PDF Oficial</button>
-                <button type="button" class="btn-outline-gray" onclick="closeModalViewCert()">Fechar</button>
+                <button type="button" class="btn-purple" onclick="window.print()">🖨️ Imprimir / Salvar PDF Oficial</button>
+                <button type="button" class="btn-outline-purple" onclick="closeModalViewCert()">Fechar</button>
             </div>
 
             <div id="printable-certificate" class="cert-border">
-                <!-- CABEÇALHO DO PDF -->
                 <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:15px;">
                     <div>
                         <h2 style="font-size:1.2rem; font-weight:bold;">METROLOGIA</h2>
@@ -672,7 +649,6 @@
                     </div>
                 </div>
 
-                <!-- CLIENTE -->
                 <div style="margin-bottom:15px; font-size:0.85rem; border:1px solid #999; padding:10px;">
                     <strong>Cliente</strong><br>
                     Empresa: <span id="pdf-cliente-nome">LATICÍNIOS LARA EIRELI</span><br>
@@ -680,34 +656,29 @@
                     CNPJ: <span id="pdf-cliente-cnpj">38.473.112/0001-32</span>
                 </div>
 
-                <!-- DADOS DO EQUIPAMENTO -->
                 <div style="margin-bottom:15px; font-size:0.85rem; border:1px solid #999; padding:10px;">
                     <strong>Dados do equipamento de medição</strong><br>
-                    Identificação do instrumento (TAG): <span id="pdf-equip-tag">TED-0021</span> | Equipamento: <span id="pdf-equip-nome">TERMOMETRO INFRAVERMELHO</span><br>
+                    Identificação (TAG): <span id="pdf-equip-tag">TED-0021</span> | Equipamento: <span id="pdf-equip-nome">TERMOMETRO INFRAVERMELHO</span><br>
                     Fabricante: <span id="pdf-equip-fab">EXBOM</span> | Série: <span id="pdf-equip-serie">NC</span> | Patrimônio: <span id="pdf-equip-pat">NC</span>
                 </div>
 
-                <!-- PROCEDIMENTO -->
                 <div style="margin-bottom:15px; font-size:0.85rem; border:1px solid #999; padding:10px;">
                     <strong>Procedimento de calibração</strong><br>
                     <span id="pdf-procedimento-texto">PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES - 1.0</span>
                 </div>
 
-                <!-- PADRÕES -->
                 <div style="margin-bottom:15px; font-size:0.85rem; border:1px solid #999; padding:10px;">
                     <strong>Padrões utilizados</strong><br>
                     1. Código: TILR0020 - Certificado: 148.677 - Validade: 01/09/2028 - Termohigrômetro Padrão<br>
                     2. Código: TILR0003 - Certificado: E32792/22 - Validade: 20/08/2027
                 </div>
 
-                <!-- CONDIÇÕES AMBIENTAIS -->
                 <div style="margin-bottom:15px; font-size:0.85rem; border:1px solid #999; padding:10px;">
                     <strong>Condições Ambientais</strong><br>
-                    Temperatura inicial: <span id="pdf-t-ini">27.1 ± 0.3</span> °C | Umidade inicial: <span id="pdf-u-ini">65.8 ± 1.6</span> % RH<br>
-                    Temperatura final: <span id="pdf-t-fim">27.1 ± 0.3</span> °C | Umidade final: <span id="pdf-u-fim">65.8 ± 1.6</span> % RH
+                    Temperatura inicial: <span id="pdf-t-ini">27.1</span> °C | Umidade inicial: <span id="pdf-u-ini">65.8</span> % RH<br>
+                    Temperatura final: <span id="pdf-t-fim">27.1</span> °C | Umidade final: <span id="pdf-u-fim">65.8</span> % RH
                 </div>
 
-                <!-- RESULTADOS -->
                 <div style="margin-bottom:15px; font-size:0.85rem;">
                     <strong>RESULTADOS</strong>
                     <table style="width:100%; border-collapse:collapse; margin-top:5px; font-size:0.8rem; border:1px solid #000;">
@@ -720,7 +691,7 @@
                                 <th style="border:1px solid #000; padding:5px;">Resultado</th>
                             </tr>
                         </thead>
-                        <tbody id="pdf-tabela-resultados">
+                        <tbody>
                             <tr><td style="border:1px solid #000; padding:4px;">-10.0 °C</td><td style="border:1px solid #000; padding:4px;">-9.7 °C</td><td style="border:1px solid #000; padding:4px;">+0.3</td><td style="border:1px solid #000; padding:4px;">0.15</td><td style="border:1px solid #000; padding:4px;">Aceito</td></tr>
                             <tr><td style="border:1px solid #000; padding:4px;">0.0 °C</td><td style="border:1px solid #000; padding:4px;">-0.0 °C</td><td style="border:1px solid #000; padding:4px;">0.0</td><td style="border:1px solid #000; padding:4px;">0.15</td><td style="border:1px solid #000; padding:4px;">Aceito</td></tr>
                             <tr><td style="border:1px solid #000; padding:4px;">50.0 °C</td><td style="border:1px solid #000; padding:4px;">50.0 °C</td><td style="border:1px solid #000; padding:4px;">0.0</td><td style="border:1px solid #000; padding:4px;">0.13</td><td style="border:1px solid #000; padding:4px;">Aceito</td></tr>
@@ -730,11 +701,9 @@
 
                 <!-- OBSERVAÇÕES CONDICIONAIS -->
                 <div id="pdf-observacoes-container" style="margin-bottom:15px; font-size:0.8rem; border:1px solid #999; padding:10px; display:none;">
-                    <strong>Observações Técnicas:</strong><br>
-                    <span id="pdf-obs-texto"></span>
+                    <strong>Observações Técnicas:</strong><br><span id="pdf-obs-texto"></span>
                 </div>
 
-                <!-- ASSINATURAS E DATAS -->
                 <div style="display:flex; justify-content:space-between; margin-top:30px; font-size:0.8rem;">
                     <div>
                         Data da calibração: <span id="pdf-data-cal">05/10/2026</span><br>
@@ -757,20 +726,20 @@
     <!-- SCRIPT -->
     <script>
         let clientesBD = [
-            { id: 1, rsocial: 'LATICÍNIOS LARA EIRELI', cnpj: '38.473.112/0001-32', endereco: 'Avenida Paineiras, 2382 - Passos, MG' },
-            { id: 2, rsocial: 'Hospital Santa Clara', cnpj: '00.123.456/0001-99', endereco: 'Av. Paulista, 1000 - São Paulo, SP' }
+            { id: 1, rsocial: 'LATICÍNIOS LARA EIRELI', cnpj: '38.473.112/0001-32', endereco: 'Avenida Paineiras, 2382 - Passos/MG' },
+            { id: 2, rsocial: 'Hospital Santa Clara', cnpj: '00.123.456/0001-99', endereco: 'Av. Paulista, 1000 - São Paulo/SP' }
         ];
 
         let certificadosBD = [
-            { id: 1, num: 'LR-7328/26', cliente: 'LATICÍNIOS LARA EIRELI', equip: 'TERMOMETRO INFRAVERMELHO', tag: 'TED-0021', fabricante: 'EXBOM', serie: 'NC', data: '05/10/2026', validade: '04/2027', tIni: '27.1', tFim: '27.1', uIni: '65.8', uFim: '65.8', obs: 'Equipamento aferido conforme padrões RBC.', ativo: true, procedimento: 'PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS' }
+            { id: 1, num: 'LR-7328/26', cliente: 'LATICÍNIOS LARA EIRELI', equip: 'TERMOMETRO INFRAVERMELHO', tag: 'TED-0021', fabricante: 'EXBOM', serie: 'NC', data: '05/10/2026', validade: '04/2027', obs: 'Equipamento aferido conforme padrões RBC.', ativo: true, procedimento: 'PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS' }
         ];
 
         const unidadesBanco = {
             'Temperatura': ['°C (Grau Celsius)', '°F (Grau Fahrenheit)', 'K (Kelvin)'],
             'Pressão': ['bar', 'kPa', 'psi', 'kgf/cm²', 'mmHg'],
-            'Elétrica': ['V (Volts)', 'A (Amperes)', 'Ω (Ohm)', 'mV'],
-            'Dimensional': ['mm (Milímetros)', 'µm (Micrômetros)', 'm (Metros)'],
-            'Massa': ['g (Gramas)', 'kg (Quilogramas)', 'mg (Miligramas)']
+            'Elétrica': ['V (Volts)', 'A (Amperes)', 'Ω (Ohm)'],
+            'Dimensional': ['mm (Milímetros)', 'µm (Micrômetros)'],
+            'Massa': ['g (Gramas)', 'kg (Quilogramas)']
         };
 
         function initSystem() {
@@ -849,10 +818,9 @@
                     <select class="proc-select">
                         <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES - Ver. 1.0</option>
                         <option>POP-MET-012 - Calibração de Pressão e Manômetros - Ver. 2.0</option>
-                        <option>POP-MET-015 - Calibração de Multímetros Digitais - Ver. 1.2</option>
                     </select>
                 </div>
-                <button type="button" class="btn-outline-gray" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
+                <button type="button" class="btn-outline-purple" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
             `;
             list.appendChild(div);
         }
@@ -863,14 +831,13 @@
             row.className = 'medicao-row form-row';
             row.innerHTML = `
                 <input type="text" placeholder="Referência" class="calc-ref">
-                <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei">
+                <input type="text" placeholder="Valor Corrigido" class="calc-lei">
                 <input type="text" placeholder="Incerteza (UE)" class="calc-ue">
             `;
             list.appendChild(row);
         }
 
         function renderTabelasGerais() {
-            // Tabela Clientes
             const cliBody = document.getElementById('tabela-clientes-body');
             if(cliBody) {
                 cliBody.innerHTML = '';
@@ -879,7 +846,6 @@
                 });
             }
 
-            // Tabela Certificados
             const dashBody = document.getElementById('dash-certs-body');
             const mainBody = document.getElementById('certificados-lista-body');
             if(dashBody) dashBody.innerHTML = '';
@@ -995,7 +961,6 @@
             document.getElementById('pdf-data-cal').innerText = cert.data.split('-').reverse().join('/');
             document.getElementById('pdf-data-prox').innerText = cert.validade;
 
-            // Observações condicionais (se ativo, exibe no PDF; se desativado, oculta)
             const obsContainer = document.getElementById('pdf-observacoes-container');
             if(cert.ativo && cert.obs && cert.obs.trim() !== '') {
                 document.getElementById('pdf-obs-texto').innerText = cert.obs;
