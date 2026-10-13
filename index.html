@@ -123,7 +123,7 @@
             display: block !important;
         }
 
-        /* ESTILO ARKMEDS (BANNERS E CAIXAS) */
+        /* ESTILO ARKMEDS */
         .section-header-banner {
             background-color: var(--primary-purple);
             color: #fff;
@@ -224,6 +224,44 @@
         .btn-view { background-color: #e2e8f0; color: #1e293b; }
         .btn-edit { background-color: #cbd5e1; color: #0f172a; }
 
+        /* FAIXAS ESTILO ARKMEDS EXATO */
+        .faixa-container {
+            border: 1px dashed var(--primary-purple);
+            border-radius: 12px;
+            padding: 25px;
+            background-color: #fafafa;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .grid-medicoes-resultados {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .box-medicoes, .box-resultados {
+            background-color: #e0d7ff;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .box-title {
+            text-align: center;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .medicao-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
         .card-table {
             background-color: #fff;
             border-radius: 8px;
@@ -256,7 +294,7 @@
             font-weight: 700;
         }
 
-        /* MODAL PDF EXATO */
+        /* MODAL PDF */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -344,7 +382,7 @@
                 </div>
             </div>
 
-            <!-- ABA 2: CADASTRAR INSTRUMENTO / CALIBRAR (LAYOUT ARKMEDS COMPLETO) -->
+            <!-- ABA 2: CADASTRAR INSTRUMENTO / CALIBRAR -->
             <div id="cadastrar-instrumento" class="tab-content">
                 <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
                     <span style="font-size:1.5rem; color:var(--primary-purple); cursor:pointer;" onclick="switchTab('dashboard')">←</span>
@@ -353,46 +391,21 @@
 
                 <input type="hidden" id="edit-cert-id">
 
-                <!-- ATALHOS DE CÓPIA / CATÁLOGO -->
-                <div class="form-row" style="margin-bottom:20px;">
-                    <div style="background:#fff; padding:15px; border-radius:8px; border:1px solid var(--border-color); flex:1;">
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Preencher com dados de um instrumento existente</label>
-                        <select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Copiar de instrumento existente</option></select>
-                    </div>
-                    <div style="background:#fff; padding:15px; border-radius:8px; border:1px solid var(--border-color); flex:1; display:flex; gap:10px;">
-                        <div style="flex:1;"><label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Fabricante (catálogo)</label><select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Fabricante (catálogo)</option></select></div>
-                        <div style="flex:1;"><label style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">Instrumento (catálogo)</label><select style="width:100%; padding:9px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;"><option>Instrumento (catálogo)</option></select></div>
-                    </div>
-                </div>
-
                 <!-- DADOS DO INSTRUMENTO -->
                 <div class="section-header-banner">DADOS DO INSTRUMENTO</div>
                 <div class="section-box">
                     <div class="form-row">
                         <div class="form-field"><label>Empresa *</label><select id="inst-empresa"></select></div>
-                        <div class="form-field"><label>Setor</label><select id="inst-setor"><option>Laboratório / Produção</option><option>Qualidade</option></select></div>
-                        <div class="form-field"><label>Subcontratação</label><select><option>Nenhum</option></select></div>
+                        <div class="form-field"><label>Setor</label><select id="inst-setor"><option>Laboratório / Produção</option></select></div>
+                        <div class="form-field"><label>Nome *</label><input type="text" id="inst-nome" value="TERMOMETRO INFRAVERMELHO"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-field"><input type="text" placeholder="Item da lista (orçamento)"><span class="sub-info">Sem vínculo com lista.</span></div>
-                        <div class="form-field"><input type="text" placeholder="Número"><span class="sub-info">Preenchido ao abrir instrumento salvo.</span></div>
+                        <div class="form-field"><label>Identificação do instrumento (TAG) *</label><input type="text" id="inst-tag" value="TED-0021"></div>
+                        <div class="form-field"><label>Fabricante *</label><input type="text" id="inst-fabricante" value="EXBOM"></div>
+                        <div class="form-field"><label>Número de série</label><input type="text" id="inst-serie" value="NC"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-field"><label>Nome *</label><input type="text" id="inst-nome" placeholder="Ex: TERMOMETRO INFRAVERMELHO"></div>
-                        <div class="form-field"><label>Identificação do instrumento (TAG) *</label><input type="text" id="inst-tag" placeholder="Ex: TED-0021"></div>
-                        <div class="form-field"><label>Tipo de instrumento *</label><select><option>Temperatura</option><option>Pressão</option><option>Elétrica</option></select></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field"><label>Fabricante *</label><input type="text" id="inst-fabricante" placeholder="Ex: EXBOM"></div>
-                        <div class="form-field"><label>Modelo</label><input type="text" id="inst-modelo" placeholder="Ex: NC"></div>
-                        <div class="form-field"><label>Número de série</label><input type="text" id="inst-serie" placeholder="Ex: NC"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-field"><label>Patrimônio</label><input type="text" id="inst-patrimonio" placeholder="Ex: NC"></div>
-                        <div class="form-field"><label>Localização</label><input type="text" id="inst-localizacao" placeholder="Ex: LATICÍNIO LARA / LABORATÓRIO"></div>
-                        <div class="form-field"><label>Sublocalização</label><input type="text" placeholder="Ex: Sala 01"></div>
-                    </div>
-                    <div class="form-row">
+                        <div class="form-field"><label>Patrimônio</label><input type="text" id="inst-patrimonio" value="NC"></div>
                         <div class="form-field"><label>Data da calibração *</label><input type="date" id="inst-data" value="2026-10-13" onchange="calcularValidadeAutomatica()"></div>
                         <div class="form-field">
                             <label>Validade (Período)</label>
@@ -405,7 +418,10 @@
                                 <option value="custom">Personalizado</option>
                             </select>
                         </div>
-                        <div class="form-field"><label>Validade (Próxima calibração)</label><input type="date" id="inst-prox-data"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field"><label>Próxima Calibração (Validade)</label><input type="date" id="inst-prox-data"></div>
+                        <div class="form-field"><label>Localização</label><input type="text" id="inst-localizacao" value="LATICÍNIO LARA / LABORATÓRIO"></div>
                     </div>
                 </div>
 
@@ -417,18 +433,8 @@
                     </label>
                 </div>
                 <div class="section-box">
-                    <textarea rows="3" id="inst-obs" style="width:100%; border-radius:8px; border:1px solid #cbd5e1; padding:10px;" placeholder="Observações e notas técnicas..."></textarea>
+                    <textarea rows="3" id="inst-obs" style="width:100%; border-radius:8px; border:1px solid #cbd5e1; padding:10px;" placeholder="Observações do equipamento...">Equipamento aferido conforme padrões RBC.</textarea>
                 </div>
-
-                <!-- MANUTENÇÃO -->
-                <div class="section-header-banner">
-                    <span>MANUTENÇÃO (PREVENTIVA E CORRETIVA)</span>
-                    <div>
-                        <button type="button" class="btn-outline-purple" style="color:#fff; border-color:#fff;" onclick="alert('Preventiva adicionada.')">Adicionar preventiva</button>
-                        <button type="button" class="btn-outline-purple" style="color:#fff; border-color:#fff;" onclick="alert('Corretiva adicionada.')">Adicionar corretiva</button>
-                    </div>
-                </div>
-                <div class="section-box"><p style="font-size:0.85rem; color:var(--text-muted);">Nenhuma manutenção registrada.</p></div>
 
                 <!-- CONDIÇÕES AMBIENTAIS -->
                 <div class="section-header-banner">CONDIÇÕES AMBIENTAIS</div>
@@ -442,7 +448,7 @@
                     </div>
                 </div>
 
-                <!-- PROCEDIMENTOS (MÚLTIPLOS) -->
+                <!-- PROCEDIMENTOS -->
                 <div class="section-header-banner">PROCEDIMENTO</div>
                 <div class="section-box">
                     <div id="procedimentos-list" style="display:flex; flex-direction:column; gap:10px;">
@@ -450,7 +456,7 @@
                             <div class="form-field" style="flex-grow:1;">
                                 <select class="proc-select">
                                     <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA - 1.0</option>
-                                    <option>POP-MET-012 - Calibração de Pressão e Manômetros - 2.0</option>
+                                    <option>POP-MET-012 - Calibração de Pressão - 2.0</option>
                                 </select>
                             </div>
                             <button type="button" class="btn-outline-purple" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
@@ -459,59 +465,89 @@
                     <div><button type="button" class="btn-outline-purple" onclick="adicionarProcedimentoRow()">+ Adicionar procedimento</button></div>
                 </div>
 
-                <!-- BANCO DE UNIDADES POR ÁREA -->
-                <div class="section-header-banner">BANCO DE UNIDADES DE MEDIÇÃO</div>
-                <div class="section-box">
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>Área Metrológica</label>
-                            <select id="unidade-area" onchange="atualizarListaUnidades()">
-                                <option value="Temperatura">Temperatura</option>
-                                <option value="Pressão">Pressão</option>
-                                <option value="Elétrica">Elétrica</option>
-                                <option value="Dimensional">Dimensional</option>
-                                <option value="Massa">Massa</option>
-                            </select>
-                        </div>
-                        <div class="form-field">
-                            <label>Unidade Específica</label>
-                            <select id="unidade-especifica">
-                                <option>°C (Grau Celsius)</option>
-                                <option>°F (Grau Fahrenheit)</option>
-                            </select>
-                        </div>
-                    </div>
+                <!-- FAIXAS DE MEDIÇÃO & RESULTADOS (MÚLTIPLAS FAIXAS ESTILO ARKMEDS) -->
+                <div class="section-header-banner">
+                    <span>FAIXAS DE MEDIÇÃO & RESULTADOS</span>
                 </div>
+                <div class="section-box" style="background:#f8fafc;">
+                    <div id="faixas-wrapper">
+                        <!-- FAIXA 1 (INICIAL) -->
+                        <div class="faixa-container" id="faixa-item-1">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-weight:bold; color:var(--primary-purple);">
+                                <span>Faixa 1</span>
+                                <span style="color:#ef4444; cursor:pointer; font-size:0.85rem;" onclick="this.closest('.faixa-container').remove()">🗑️ Remover</span>
+                            </div>
 
-                <!-- FAIXAS & RESULTADOS -->
-                <h3 style="margin-top:20px; margin-bottom:10px;">Faixas de Medição & Resultados</h3>
-                <div class="section-box">
-                    <div class="form-row">
-                        <div class="form-field"><label>Mínima</label><input type="text" value="-50.0"></div>
-                        <div class="form-field"><label>Máxima</label><input type="text" value="330.0"></div>
-                        <div class="form-field"><label>Menor Divisão</label><input type="text" value="0.1"></div>
-                        <div class="form-field"><label>Tolerância</label><input type="text" value="±5 °C"></div>
+                            <button type="button" class="btn-purple" style="font-size:0.8rem; padding:6px 14px; margin-bottom:15px;">+ Adicionar padrão</button>
+
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-field" style="grid-column: span 3;"><input type="text" placeholder="Nome da faixa (Ex: -50 °C a 330 °C)" value="-50.0 °C a 330.0 °C"></div>
+                            </div>
+
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-field"><input type="text" placeholder="Tolerância" value="±5 °C"></div>
+                                <div class="form-field"><select><option>Valor (na unidade)</option><option>% do Fundo de Escala</option></select></div>
+                            </div>
+
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-field"><input type="text" placeholder="Mínima" value="-50.0"></div>
+                                <div class="form-field"><input type="text" placeholder="Máxima" value="330.0"></div>
+                            </div>
+
+                            <div class="form-row" style="margin-bottom:12px;">
+                                <div class="form-field"><input type="text" placeholder="Menor divisão" value="0.1"></div>
+                                <div class="form-field"><input type="text" placeholder="Resolução" value="0.1"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field"><select><option>Temperatura</option></select></div>
+                                <div class="form-field"><select><option>°C (Grau Celsius)</option></select></div>
+                                <div class="form-field"><select><option>Instrumento específico (opcional)</option></select></div>
+                            </div>
+
+                            <!-- LAYOUT LADO A LADO: MEDIÇÕES x RESULTADOS (EXATO DA IMAGEM) -->
+                            <div class="grid-medicoes-resultados">
+                                <div class="box-medicoes">
+                                    <div class="box-title">Medições</div>
+                                    <div class="medicoes-list-container" style="display:flex; flex-direction:column; gap:10px;">
+                                        <div class="medicao-row">
+                                            <input type="text" placeholder="Referência" class="calc-ref" value="-10.0" oninput="calcularMetrologia(this)">
+                                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="-9.7" oninput="calcularMetrologia(this)">
+                                            <button type="button" style="background:transparent; border:none; cursor:pointer; color:#ef4444;" onclick="this.closest('.medicao-row').remove()">🗑️</button>
+                                        </div>
+                                        <div class="medicao-row">
+                                            <input type="text" placeholder="Referência" class="calc-ref" value="0.0" oninput="calcularMetrologia(this)">
+                                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="-0.0" oninput="calcularMetrologia(this)">
+                                            <button type="button" style="background:transparent; border:none; cursor:pointer; color:#ef4444;" onclick="this.closest('.medicao-row').remove()">🗑️</button>
+                                        </div>
+                                        <div class="medicao-row">
+                                            <input type="text" placeholder="Referência" class="calc-ref" value="50.0" oninput="calcularMetrologia(this)">
+                                            <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" value="50.0" oninput="calcularMetrologia(this)">
+                                            <button type="button" style="background:transparent; border:none; cursor:pointer; color:#ef4444;" onclick="this.closest('.medicao-row').remove()">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-purple" style="font-size:0.8rem; margin-top:12px;" onclick="addMedicaoRow(this)">+ Adicionar medição</button>
+                                </div>
+
+                                <div class="box-resultados">
+                                    <div class="box-title">Resultados</div>
+                                    <div style="display:flex; flex-direction:column; gap:10px;">
+                                        <div class="form-field"><label>Referência</label><input type="text" value="-10.0" readonly></div>
+                                        <div class="form-field"><label>Média das medidas</label><input type="text" value="-9.7000" readonly></div>
+                                        <div class="form-field"><label>Média corrigida</label><input type="text" value="-9.7000" readonly></div>
+                                        <div class="form-field"><label>Erro Sistemático</label><input type="text" value="+0.3000" readonly></div>
+                                        <div class="form-field"><label>Incerteza de Medição</label><input type="text" value="0.15" readonly></div>
+                                        <div class="form-field"><label>Repetitividade</label><input type="text" value="0.0000" readonly></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div style="font-weight:600; margin-top:15px; margin-bottom:10px;">Tabela de Medições</div>
-                    <div id="medicoes-list" style="display:flex; flex-direction:column; gap:8px;">
-                        <div class="medicao-row form-row">
-                            <input type="text" placeholder="Referência" class="calc-ref" value="-10.0">
-                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="-9.7">
-                            <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.15">
-                        </div>
-                        <div class="medicao-row form-row">
-                            <input type="text" placeholder="Referência" class="calc-ref" value="0.0">
-                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="-0.0">
-                            <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.15">
-                        </div>
-                        <div class="medicao-row form-row">
-                            <input type="text" placeholder="Referência" class="calc-ref" value="50.0">
-                            <input type="text" placeholder="Valor Corrigido" class="calc-lei" value="50.0">
-                            <input type="text" placeholder="Incerteza (UE)" class="calc-ue" value="0.13">
-                        </div>
+                    <!-- BOTÃO ADICIONAR FAIXA -->
+                    <div>
+                        <button type="button" class="btn-outline-purple" onclick="adicionarNovaFaixa()">+ Adicionar faixa</button>
                     </div>
-                    <button type="button" class="btn-outline-purple" style="margin-top:10px;" onclick="addMedicaoRow()">+ Adicionar medição</button>
                 </div>
 
                 <div style="display:flex; justify-content:flex-end; gap:15px; margin-top:30px;">
@@ -549,12 +585,7 @@
                 <div class="card-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição do Padrão</th>
-                                <th>Certificado RBC</th>
-                                <th>Validade</th>
-                            </tr>
+                            <tr><th>Código</th><th>Descrição do Padrão</th><th>Certificado RBC</th><th>Validade</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>TILR0020</td><td>Termohigrômetro Padrão (Temperatura, Umidade)</td><td>148.677</td><td>01/09/2028</td></tr>
@@ -590,11 +621,7 @@
                 <div class="card-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Empresa / Razão Social</th>
-                                <th>CNPJ</th>
-                                <th>Endereço</th>
-                            </tr>
+                            <tr><th>Empresa / Razão Social</th><th>CNPJ</th><th>Endereço</th></tr>
                         </thead>
                         <tbody id="tabela-clientes-body"></tbody>
                     </table>
@@ -606,16 +633,8 @@
                 <h2>Procedimentos ISO 17025</h2>
                 <div class="card-table">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição do Ensaio / Calibração</th>
-                                <th>Revisão</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>PCLR0080</td><td>CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA</td><td>1.0</td></tr>
-                        </tbody>
+                        <thead><tr><th>Código</th><th>Descrição do Ensaio / Calibração</th><th>Revisão</th></tr></thead>
+                        <tbody><tr><td>PCLR0080</td><td>CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA</td><td>1.0</td></tr></tbody>
                     </table>
                 </div>
             </div>
@@ -699,7 +718,6 @@
                     </table>
                 </div>
 
-                <!-- OBSERVAÇÕES CONDICIONAIS -->
                 <div id="pdf-observacoes-container" style="margin-bottom:15px; font-size:0.8rem; border:1px solid #999; padding:10px; display:none;">
                     <strong>Observações Técnicas:</strong><br><span id="pdf-obs-texto"></span>
                 </div>
@@ -734,17 +752,10 @@
             { id: 1, num: 'LR-7328/26', cliente: 'LATICÍNIOS LARA EIRELI', equip: 'TERMOMETRO INFRAVERMELHO', tag: 'TED-0021', fabricante: 'EXBOM', serie: 'NC', data: '05/10/2026', validade: '04/2027', obs: 'Equipamento aferido conforme padrões RBC.', ativo: true, procedimento: 'PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS' }
         ];
 
-        const unidadesBanco = {
-            'Temperatura': ['°C (Grau Celsius)', '°F (Grau Fahrenheit)', 'K (Kelvin)'],
-            'Pressão': ['bar', 'kPa', 'psi', 'kgf/cm²', 'mmHg'],
-            'Elétrica': ['V (Volts)', 'A (Amperes)', 'Ω (Ohm)'],
-            'Dimensional': ['mm (Milímetros)', 'µm (Micrômetros)'],
-            'Massa': ['g (Gramas)', 'kg (Quilogramas)']
-        };
+        let faixaContador = 1;
 
         function initSystem() {
             atualizarSelectClientes();
-            atualizarListaUnidades();
             calcularValidadeAutomatica();
             switchTab('dashboard');
         }
@@ -773,16 +784,6 @@
             select.innerHTML = '';
             clientesBD.forEach(c => {
                 select.innerHTML += `<option value="${c.rsocial}">${c.rsocial} (${c.cnpj})</option>`;
-            });
-        }
-
-        function atualizarListaUnidades() {
-            const area = document.getElementById('unidade-area').value;
-            const especifica = document.getElementById('unidade-especifica');
-            if(!especifica) return;
-            especifica.innerHTML = '';
-            (unidadesBanco[area] || []).forEach(u => {
-                especifica.innerHTML += `<option>${u}</option>`;
             });
         }
 
@@ -816,8 +817,8 @@
             div.innerHTML = `
                 <div class="form-field" style="flex-grow:1;">
                     <select class="proc-select">
-                        <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES - Ver. 1.0</option>
-                        <option>POP-MET-012 - Calibração de Pressão e Manômetros - Ver. 2.0</option>
+                        <option>PCLR0080 - CALIBRAÇÃO DE TERMÔMETROS E INDICADORES DE TEMPERATURA - 1.0</option>
+                        <option>POP-MET-012 - Calibração de Pressão - 2.0</option>
                     </select>
                 </div>
                 <button type="button" class="btn-outline-purple" style="max-width:120px; align-self:flex-end;" onclick="this.parentElement.remove()">Remover</button>
@@ -825,16 +826,106 @@
             list.appendChild(div);
         }
 
-        function addMedicaoRow() {
-            const list = document.getElementById('medicoes-list');
+        function addMedicaoRow(btn) {
+            const container = btn.previousElementSibling;
             const row = document.createElement('div');
-            row.className = 'medicao-row form-row';
+            row.className = 'medicao-row';
             row.innerHTML = `
-                <input type="text" placeholder="Referência" class="calc-ref">
-                <input type="text" placeholder="Valor Corrigido" class="calc-lei">
-                <input type="text" placeholder="Incerteza (UE)" class="calc-ue">
+                <input type="text" placeholder="Referência" class="calc-ref" oninput="calcularMetrologia(this)">
+                <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" oninput="calcularMetrologia(this)">
+                <button type="button" style="background:transparent; border:none; cursor:pointer; color:#ef4444;" onclick="this.closest('.medicao-row').remove()">🗑️</button>
             `;
-            list.appendChild(row);
+            container.appendChild(row);
+        }
+
+        function adicionarNovaFaixa() {
+            faixaContador++;
+            const wrapper = document.getElementById('faixas-wrapper');
+            const div = document.createElement('div');
+            div.className = 'faixa-container';
+            div.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-weight:bold; color:var(--primary-purple);">
+                    <span>Faixa ${faixaContador}</span>
+                    <span style="color:#ef4444; cursor:pointer; font-size:0.85rem;" onclick="this.closest('.faixa-container').remove()">🗑️ Remover</span>
+                </div>
+                <button type="button" class="btn-purple" style="font-size:0.8rem; padding:6px 14px; margin-bottom:15px;">+ Adicionar padrão</button>
+                <div class="form-row" style="margin-bottom:12px;">
+                    <div class="form-field" style="grid-column: span 3;"><input type="text" placeholder="Nome da faixa"></div>
+                </div>
+                <div class="form-row" style="margin-bottom:12px;">
+                    <div class="form-field"><input type="text" placeholder="Tolerância"></div>
+                    <div class="form-field"><select><option>Valor (na unidade)</option><option>% do Fundo de Escala</option></select></div>
+                </div>
+                <div class="form-row" style="margin-bottom:12px;">
+                    <div class="form-field"><input type="text" placeholder="Mínima"></div>
+                    <div class="form-field"><input type="text" placeholder="Máxima"></div>
+                </div>
+                <div class="form-row" style="margin-bottom:12px;">
+                    <div class="form-field"><input type="text" placeholder="Menor divisão"></div>
+                    <div class="form-field"><input type="text" placeholder="Resolução"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field"><select><option>Temperatura</option></select></div>
+                    <div class="form-field"><select><option>°C (Grau Celsius)</option></select></div>
+                    <div class="form-field"><select><option>Instrumento específico (opcional)</option></select></div>
+                </div>
+                <div class="grid-medicoes-resultados">
+                    <div class="box-medicoes">
+                        <div class="box-title">Medições</div>
+                        <div class="medicoes-list-container" style="display:flex; flex-direction:column; gap:10px;">
+                            <div class="medicao-row">
+                                <input type="text" placeholder="Referência" class="calc-ref" oninput="calcularMetrologia(this)">
+                                <input type="text" placeholder="Leitura (Corrigido)" class="calc-lei" oninput="calcularMetrologia(this)">
+                                <button type="button" style="background:transparent; border:none; cursor:pointer; color:#ef4444;" onclick="this.closest('.medicao-row').remove()">🗑️</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-purple" style="font-size:0.8rem; margin-top:12px;" onclick="addMedicaoRow(this)">+ Adicionar medição</button>
+                    </div>
+                    <div class="box-resultados">
+                        <div class="box-title">Resultados</div>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <div class="form-field"><label>Referência</label><input type="text" readonly></div>
+                            <div class="form-field"><label>Média das medidas</label><input type="text" readonly></div>
+                            <div class="form-field"><label>Média corrigida</label><input type="text" readonly></div>
+                            <div class="form-field"><label>Erro Sistemático</label><input type="text" readonly></div>
+                            <div class="form-field"><label>Incerteza de Medição</label><input type="text" readonly></div>
+                            <div class="form-field"><label>Repetitividade</label><input type="text" readonly></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            wrapper.appendChild(div);
+        }
+
+        function calcularMetrologia(element) {
+            const faixa = element.closest('.faixa-container');
+            const refs = faixa.querySelectorAll('.calc-ref');
+            const leis = faixa.querySelectorAll('.calc-lei');
+            const resInputs = faixa.querySelectorAll('.box-resultados input');
+            
+            let somaLei = 0, somaRef = 0, count = 0;
+            for(let i=0; i<leis.length; i++) {
+                let r = parseFloat(refs[i].value);
+                let l = parseFloat(leis[i].value);
+                if(!isNaN(l) && !isNaN(r)) {
+                    somaLei += l;
+                    somaRef += r;
+                    count++;
+                }
+            }
+
+            if(count > 0 && resInputs.length >= 4) {
+                let mediaLei = somaLei / count;
+                let mediaRef = somaRef / count;
+                let erro = mediaLei - mediaRef;
+
+                resInputs[0].value = mediaRef.toFixed(2);
+                resInputs[1].value = mediaLei.toFixed(4);
+                resInputs[2].value = mediaLei.toFixed(4);
+                resInputs[3].value = (erro >= 0 ? '+' : '') + erro.toFixed(4);
+                resInputs[4].value = "0.15";
+                resInputs[5].value = "0.0000";
+            }
         }
 
         function renderTabelasGerais() {
