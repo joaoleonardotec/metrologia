@@ -8,7 +8,6 @@
         :root {
             --primary-purple: #5b3cf5;
             --primary-purple-hover: #482cd4;
-            --light-purple: #f0ecff;
             --primary-blue: #0056b3;
             --sidebar-bg: #1a202c;
             --sidebar-hover: #2d3748;
@@ -43,6 +42,7 @@
             flex-direction: column;
             box-shadow: 4px 0 10px rgba(0,0,0,0.1);
             z-index: 10;
+            flex-shrink: 0;
         }
 
         .sidebar-brand {
@@ -111,8 +111,11 @@
 
         .content-body {
             padding: 30px;
+            flex-grow: 1;
+            overflow-y: auto;
         }
 
+        /* GERENCIAMENTO DE ABAS */
         .tab-content {
             display: none;
         }
@@ -121,7 +124,7 @@
             display: block !important;
         }
 
-        /* ESTILO FORMULÁRIO ARKMEDS */
+        /* ESTILOS DE COMPONENTES */
         .section-header-banner {
             background-color: var(--primary-purple);
             color: #fff;
@@ -131,9 +134,6 @@
             font-size: 0.85rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-top: 25px;
         }
 
@@ -167,7 +167,7 @@
             margin-bottom: 5px;
         }
 
-        .form-field input, .form-field select, .form-field textarea {
+        .form-field input, .form-field select {
             padding: 10px 14px;
             border: 1px solid #cbd5e1;
             border-radius: 8px;
@@ -177,13 +177,6 @@
             background-color: #fff;
         }
 
-        .sub-info {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-
-        /* BOTÕES */
         .btn-purple {
             background-color: var(--primary-purple);
             color: #fff;
@@ -197,17 +190,6 @@
 
         .btn-purple:hover { background-color: var(--primary-purple-hover); }
 
-        .btn-outline-purple {
-            background: transparent;
-            color: var(--primary-purple);
-            border: 1.5px solid var(--primary-purple);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
         .btn-primary {
             background-color: var(--primary-blue);
             color: #fff;
@@ -218,42 +200,6 @@
             font-weight: 600;
         }
 
-        /* FAIXAS E MEDIÇÕES */
-        .faixa-container {
-            border: 1px dashed var(--primary-purple);
-            border-radius: 8px;
-            padding: 20px;
-            background-color: #fafafa;
-            margin-top: 15px;
-        }
-
-        .grid-medicoes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .box-medicoes, .box-resultados {
-            background-color: #e0d7ff;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .medicao-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .medicao-row input {
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-        }
-
-        /* TABELAS */
         .card-table {
             background-color: #fff;
             border-radius: 8px;
@@ -286,6 +232,280 @@
         }
     </style>
 </head>
-<body>
+<body onload="switchTab('dashboard')">
 
-    <!-- SIDEBAR DE NAVEGAÇÃO -->
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="sidebar-brand">
+            <img src="logo.png" alt="Logo Metrologia" id="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <span id="logo-fallback" style="display:none; font-weight:bold; font-size:1.3rem; color:#fff; text-align:center;">Metrologia <br><span style="color:#a5b4fc;">Portal Lab</span></span>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item active" id="menu-dashboard"><a href="javascript:void(0)" onclick="switchTab('dashboard')">📊 Visão Geral</a></li>
+            <li class="menu-item" id="menu-cadastrar-instrumento"><a href="javascript:void(0)" onclick="switchTab('cadastrar-instrumento')">➕ Cadastrar Instrumento / Calibrar</a></li>
+            <li class="menu-item" id="menu-certificados"><a href="javascript:void(0)" onclick="switchTab('certificados')">📜 Certificados Emitidos</a></li>
+            <li class="menu-item" id="menu-padroes"><a href="javascript:void(0)" onclick="switchTab('padroes')">⚖️ Padrões & Rastreabilidade</a></li>
+            <li class="menu-item" id="menu-clientes"><a href="javascript:void(0)" onclick="switchTab('clientes')">🏢 Clientes & Empresas (CRUD)</a></li>
+            <li class="menu-item" id="menu-procedimentos"><a href="javascript:void(0)" onclick="switchTab('procedimentos')">📋 Procedimentos (ISO 17025)</a></li>
+            <li class="menu-item" id="menu-configuracoes"><a href="javascript:void(0)" onclick="switchTab('configuracoes')">⚙️ Configurações</a></li>
+        </ul>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main>
+        <header>
+            <div style="display:flex; align-items:center; gap:10px; color:var(--text-muted); font-size:0.85rem;">
+                🏠 Dashboard &gt; <strong style="color:var(--primary-purple);" id="breadcrumb-title">Visão Geral</strong>
+            </div>
+            <div style="font-weight:600; font-size:0.9rem;">Laboratório Central</div>
+        </header>
+
+        <div class="content-body">
+            
+            <!-- ABA 1: VISÃO GERAL -->
+            <div id="dashboard" class="tab-content active">
+                <h2 style="margin-bottom:20px;">Painel Geral de Metrologia</h2>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Certificado</th>
+                                <th>Cliente</th>
+                                <th>Instrumento</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CERT-2026-001</td>
+                                <td>Hospital Santa Clara</td>
+                                <td>Desfibrilador Cardiaco</td>
+                                <td>13/10/2026</td>
+                                <td><span class="badge-success">Aprovado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA 2: CADASTRAR INSTRUMENTO -->
+            <div id="cadastrar-instrumento" class="tab-content">
+                <h2 style="color:var(--primary-purple); margin-bottom:20px;">Cadastrar Instrumento</h2>
+                <div class="section-header-banner">DADOS DO INSTRUMENTO</div>
+                <div class="section-box">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Empresa *</label>
+                            <select id="inst-empresa">
+                                <option>Hospital Santa Clara</option>
+                                <option>Indústria Metalúrgica Alfa</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>Nome *</label>
+                            <input type="text" id="inst-nome" placeholder="Ex: Manômetro Digital">
+                        </div>
+                        <div class="form-field">
+                            <label>Identificação / TAG *</label>
+                            <input type="text" id="inst-tag" placeholder="Ex: TAG-102">
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; margin-top:20px;">
+                    <button class="btn-purple" onclick="salvarInstrumentoECertificado()">Salvar & Emitir Certificado</button>
+                </div>
+            </div>
+
+            <!-- ABA 3: CERTIFICADOS -->
+            <div id="certificados" class="tab-content">
+                <h2>Certificados Emitidos</h2>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº Certificado</th>
+                                <th>Cliente</th>
+                                <th>Equipamento</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="certificados-lista-body">
+                            <tr>
+                                <td>CERT-2026-001</td>
+                                <td>Hospital Santa Clara</td>
+                                <td>Manômetro Digital Fluke</td>
+                                <td>13/10/2026</td>
+                                <td><span class="badge-success">Aprovado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA 4: PADRÕES -->
+            <div id="padroes" class="tab-content">
+                <h2>Padrões de Referência (RBC)</h2>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição do Padrão</th>
+                                <th>Código</th>
+                                <th>Certificado RBC</th>
+                                <th>Validade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Multímetro Padrão 6.5 Dígitos (Fluke)</td>
+                                <td>PAD-ELE-01</td>
+                                <td>RBC-2025-9921</td>
+                                <td>15/06/2027</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA 5: CLIENTES -->
+            <div id="clientes" class="tab-content">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2>Gestão de Clientes & Empresas</h2>
+                    <button class="btn-primary" onclick="toggleFormCliente(true)">+ Novo Cliente</button>
+                </div>
+                <div id="form-cliente-container" style="display:none; background:#fff; padding:20px; border-radius:8px; border:1px solid var(--border-color); margin-bottom:20px;">
+                    <h4 style="color:var(--primary-blue); margin-bottom:15px;">Cadastro de Cliente</h4>
+                    <div class="form-row">
+                        <div class="form-field"><label>Razão Social</label><input type="text" id="rsocial-input"></div>
+                        <div class="form-field"><label>CNPJ</label><input type="text" id="cnpj-input"></div>
+                    </div>
+                    <div style="margin-top:15px; display:flex; gap:10px;">
+                        <button class="btn-primary" onclick="salvarCliente()">Salvar Cliente</button>
+                        <button class="btn-primary" style="background:#64748b;" onclick="toggleFormCliente(false)">Cancelar</button>
+                    </div>
+                </div>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>CNPJ</th>
+                                <th>Contato</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-clientes-body">
+                            <tr>
+                                <td>Hospital Santa Clara</td>
+                                <td>00.123.456/0001-99</td>
+                                <td>engenharia@santaclara.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA 6: PROCEDIMENTOS -->
+            <div id="procedimentos" class="tab-content">
+                <h2>Procedimentos ISO 17025</h2>
+                <div class="card-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código POP</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>POP-MET-012</td>
+                                <td>Calibração de Instrumentos de Pressão</td>
+                                <td><span class="badge-success">Vigente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA 7: CONFIGURAÇÕES -->
+            <div id="configuracoes" class="tab-content">
+                <h2>Configurações do Laboratório</h2>
+                <p style="margin-top:10px; color:var(--text-muted);">Informações de registro CREA e Acreditação CGCRE/INMETRO.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SCRIPT DE NAVEGAÇÃO ROBUSTO -->
+    <script>
+        function switchTab(tabId) {
+            // Oculta todas as abas
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            // Remove a seleção de todos os itens do menu
+            const items = document.querySelectorAll('.sidebar-menu li');
+            items.forEach(item => item.classList.remove('active'));
+
+            // Exibe a aba alvo
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+
+            // Destaca o menu correspondente
+            const menuLi = document.getElementById('menu-' + tabId);
+            if (menuLi) {
+                menuLi.classList.add('active');
+            }
+
+            // Atualiza o título do topo
+            const names = {
+                'dashboard': 'Visão Geral',
+                'cadastrar-instrumento': 'Cadastrar Instrumento / Calibrar',
+                'certificados': 'Certificados Emitidos',
+                'padroes': 'Padrões & Rastreabilidade',
+                'clientes': 'Clientes & Empresas',
+                'procedimentos': 'Procedimentos ISO 17025',
+                'configuracoes': 'Configurações'
+            };
+            const breadcrumb = document.getElementById('breadcrumb-title');
+            if(breadcrumb) {
+                breadcrumb.innerText = names[tabId] || 'Sistema';
+            }
+        }
+
+        function toggleFormCliente(show) {
+            document.getElementById('form-cliente-container').style.display = show ? 'block' : 'none';
+        }
+
+        function salvarCliente() {
+            const rsocial = document.getElementById('rsocial-input').value;
+            const cnpj = document.getElementById('cnpj-input').value;
+            if(!rsocial) return alert('Preencha a Razão Social.');
+
+            const tbody = document.getElementById('tabela-clientes-body');
+            tbody.innerHTML += `<tr><td>${rsocial}</td><td>${cnpj || 'N/D'}</td><td>Contato Cadastrado</td></tr>`;
+            toggleFormCliente(false);
+            alert('Cliente salvo com sucesso!');
+        }
+
+        function salvarInstrumentoECertificado() {
+            const nome = document.getElementById('inst-nome').value || 'Manômetro Teste';
+            const empresa = document.getElementById('inst-empresa').value;
+            
+            const tbody = document.getElementById('certificados-lista-body');
+            tbody.innerHTML += `<tr><td>CERT-2026-002</td><td>${empresa}</td><td>${nome}</td><td>13/10/2026</td><td><span class="badge-success">Aprovado</span></td></tr>`;
+
+            alert(`Instrumento "${nome}" salvo com sucesso!`);
+            switchTab('certificados');
+        }
+    </script>
+</body>
+</html>
