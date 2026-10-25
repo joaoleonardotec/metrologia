@@ -1,0 +1,87 @@
+
+name: Publicar Nexus com JavaScript minificado
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v7
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Preparar HTML e minificar JavaScript
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, shutil, sys
+
+          source = Path('index.html')
+          if not source.is_file():
+              sys.exit('ERRO: index.html não encontrado na raiz do repositório.')
+
+          html = source.read_text(encoding='utf-8')
+          pattern = re.compile(r'<script\s*>([\s\S]*?)</script\s*>', re.IGNORECASE)
+          matches = list(pattern.finditer(html))
+          if len(matches) != 1:
+              sys.exit(f'ERRO: esperado 1 bloco <script> principal sem atributos; encontrados {len(matches)}. Nenhum site foi publicado.')
+
+          match = matches[0]
+          Path('_nexus_original_tmp.js').write_text(match.group(1), encoding='utf-8')
+          dist = Path('dist')
+          if dist.exists():
+              shutil.rmtree(dist)
+          dist.mkdir()
+
+          # Copia recursos estáticos, não arquivos-fonte HTML/JS.
+          for item in Path('.').iterdir():
+              if item.name in {'.git', '.github', 'node_modules', 'dist', source.name} or item.name.startswith('.'):
+                  continue
+              if item.is_file():
+                  if item.suffix.lower() in {'.html', '.js', '.map', '.md', '.yml', '.yaml'}:
+                      continue
+                  shutil.copy2(item, dist / item.name)
+              elif item.is_dir():
+                  ignored = shutil.ignore_patterns('.git', '.github', 'node_modules', 'dist', '*.html', '*.js', '*.map', '*.md', '*.yml', '*.yaml')
+                  shutil.copytree(item, dist / item.name, ignore=ignored)
+
+          public_html = html[:match.start()] + '<script src="./app.min.js" defer></script>' + html[match.end():]
+          (dist / 'index.html').write_text(public_html, encoding='utf-8')
+          PY
+          npx --yes terser@5 _nexus_original_tmp.js --compress --mangle --format 'comments=false' --output dist/app.min.js
+          rm _nexus_original_tmp.js
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar os arquivos do site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: Publicar o Nexus
+        id: deployment
+        uses: actions/deploy-pages@v5
+  
