@@ -406,6 +406,84 @@ select:hover{background-color:var(--p-bg)}
 .choice-flash{animation:choiceFlash .45s ease-out}
 .brand .logo,.logo-slot{display:flex;align-items:center;justify-content:center;overflow:hidden}
 .brand .logo-slot img{display:block;margin:auto;object-position:center}
+
+/* v9 — refinamento de marca e agenda operacional */
+.brand .logo-slot{
+  width:100%; min-height:96px; height:96px; margin:0 auto; padding:10px 12px;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  box-sizing:border-box; line-height:0;
+}
+.brand .logo-slot img{
+  display:block; width:auto; height:auto; max-width:100%; max-height:66px;
+  margin:0 auto; object-fit:contain; object-position:50% 50%; flex:0 1 auto;
+}
+.boas{min-height:118px;padding:28px 32px;background:linear-gradient(118deg,var(--p) 0%,#312e81 58%,#172554 100%);box-shadow:0 12px 28px rgba(30,41,59,.14)}
+.boas h2{font-weight:750;letter-spacing:-.035em}
+.boas:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 4px 4px 0;background:rgba(255,255,255,.78)}
+.agenda{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:16px;margin:0 0 22px;align-items:start}
+.agenda-panel{background:var(--card);border:1px solid var(--line);border-radius:14px;min-width:0;overflow:hidden;box-shadow:0 4px 16px rgba(15,23,42,.035)}
+.agenda-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.agenda-head h3{font-size:1rem;letter-spacing:-.015em}
+.agenda-head p{font-size:.78rem;color:var(--muted);margin-top:5px;line-height:1.4}
+.cal-nav{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.cal-nav strong{min-width:130px;text-align:center;font-size:.88rem;text-transform:capitalize}
+.cal-nav button{border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);padding:7px 10px;cursor:pointer;font-weight:650;transition:.18s}
+.cal-nav button:hover{border-color:var(--p);color:var(--p);background:var(--p-bg)}
+.cal-weekdays,.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;padding:0 14px}
+.cal-weekdays{padding-top:14px;padding-bottom:8px;text-align:center;font-size:.68rem;font-weight:750;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.cal-grid{padding-bottom:16px}
+.cal-day,.cal-blank{min-width:0;min-height:60px;border-radius:10px}
+.cal-day{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;border:1px solid transparent;background:transparent;color:var(--text);padding:8px 4px 5px;cursor:pointer;transition:background .16s,border-color .16s,transform .16s}
+.cal-day:hover{background:var(--p-bg);border-color:var(--line);transform:translateY(-1px)}
+.cal-day .day-n{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;font-size:.8rem;font-weight:650}
+.cal-day.today .day-n{outline:1px solid var(--p);outline-offset:2px}
+.cal-day.selected{background:var(--p-bg);border-color:var(--p);box-shadow:inset 0 0 0 1px var(--p)}
+.cal-day.selected .day-n{background:var(--p);color:white}
+.cal-day.other-month{opacity:.38}
+.cal-day .day-events{display:flex;align-items:center;justify-content:center;gap:3px;min-height:5px;max-width:100%}
+.cal-day .day-events i{display:block;width:5px;height:5px;border-radius:50%;background:var(--p)}
+.cal-day .day-count{font-size:.62rem;line-height:1;color:var(--muted)}
+.agenda-legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:0 18px 16px;color:var(--muted);font-size:.72rem}
+.agenda-legend i{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:var(--p)}
+.agenda-side-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:18px 18px 13px;border-bottom:1px solid var(--line)}
+.agenda-side-head strong{font-size:.95rem;line-height:1.35}
+.agenda-side-head span{display:block;color:var(--muted);font-size:.74rem;margin-top:4px}
+.cal-note-list{display:flex;flex-direction:column;gap:9px;padding:14px 16px;max-height:255px;overflow:auto}
+.cal-note-empty{padding:16px 12px;border:1px dashed var(--line);border-radius:10px;text-align:center;font-size:.8rem;line-height:1.5;color:var(--muted)}
+.cal-note{padding:11px 12px;border:1px solid var(--line);border-left:3px solid var(--p);border-radius:10px;background:var(--th);min-width:0}
+.cal-note-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.cal-note-title{font-weight:750;font-size:.84rem;line-height:1.35;overflow-wrap:anywhere}
+.cal-note-text{font-size:.78rem;line-height:1.5;color:var(--muted);margin-top:6px;overflow-wrap:anywhere;white-space:pre-wrap}
+.cal-note-link{font-size:.73rem;color:var(--p);font-weight:650;margin-top:7px;overflow-wrap:anywhere}
+.cal-note-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.cal-note-actions button{font-size:.72rem;padding:5px 9px;border-radius:7px}
+.cal-editor{border-top:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--card)}
+.cal-editor-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.88rem;font-weight:750}
+.cal-editor .f{gap:6px}
+.cal-editor .f>label{font-size:.74rem!important}
+.cal-editor textarea{min-height:82px}
+.cal-editor-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}
+.cal-editor-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cal-editor-actions .btn{margin:0}
+.cal-hint{font-size:.72rem;color:var(--muted);line-height:1.45}
+@media(max-width:1050px){.agenda{grid-template-columns:minmax(0,1fr)}.cal-note-list{max-height:320px}}
+@media(max-width:760px){
+  .brand .logo-slot{width:112px;height:48px;min-height:48px;flex:0 0 112px;padding:4px;border-radius:10px;margin:0}
+  .brand .logo-slot img{max-height:39px;max-width:100%;margin:auto}
+  .boas{min-height:100px;padding:22px 22px 22px 25px}
+  .agenda-head{padding:15px 13px;align-items:flex-start;flex-direction:column}
+  .cal-nav{width:100%;justify-content:space-between}
+  .cal-nav strong{flex:1;min-width:100px}
+  .cal-weekdays,.cal-grid{gap:3px;padding-left:8px;padding-right:8px}
+  .cal-weekdays{font-size:.6rem;padding-top:10px}
+  .cal-day,.cal-blank{min-height:48px}
+  .cal-day{padding:5px 1px 3px;border-radius:8px}
+  .cal-day .day-n{width:24px;height:24px;font-size:.75rem}
+  .cal-day .day-count{font-size:.57rem}
+  .agenda-side-head{padding:15px 13px}
+  .cal-note-list,.cal-editor{padding:12px}
+}
+
 </style>
 </head>
 <body onload="initSystem()">
@@ -421,6 +499,33 @@ select:hover{background-color:var(--p-bg)}
   <div id="boas"></div>
   <div class="kpis" id="kpis"></div>
   <div class="charts" id="charts"></div>
+  <section class="agenda" aria-label="Agenda operacional">
+    <div class="agenda-panel">
+      <div class="agenda-head">
+        <div><h3>Agenda operacional</h3><p>Selecione um dia para registrar lembretes e vinculá-los às atividades do laboratório.</p></div>
+        <div class="cal-nav"><button type="button" onclick="calMoverMes(-1)" aria-label="Mês anterior">‹</button><strong id="cal-month-title">Mês</strong><button type="button" onclick="calMoverMes(1)" aria-label="Próximo mês">›</button><button type="button" onclick="calIrHoje()">Hoje</button></div>
+      </div>
+      <div class="cal-weekdays" aria-hidden="true"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+      <div class="cal-grid" id="cal-grid" role="grid" aria-label="Calendário mensal"></div>
+      <div class="agenda-legend"><span><i></i> Dia com nota ou atividade</span><span id="cal-month-summary">0 registros neste mês</span></div>
+    </div>
+    <div class="agenda-panel">
+      <div class="agenda-side-head"><div><strong id="cal-selected-title">Atividades do dia</strong><span id="cal-selected-sub">Notas e operações vinculadas</span></div><button class="btn btn-s btn-o" type="button" onclick="calNovo()">+ Nova nota</button></div>
+      <div class="cal-note-list" id="cal-note-list"></div>
+      <div class="cal-editor" id="cal-editor">
+        <div class="cal-editor-title"><span id="cal-editor-heading">Adicionar nota</span><span class="sub">Salvo neste navegador</span></div>
+        <input type="hidden" id="cal-note-id">
+        <div class="cal-editor-grid">
+          <div class="f"><label for="cal-note-title">Título da nota *</label><input id="cal-note-title" maxlength="140" placeholder="Ex.: Revisar certificado do cliente"></div>
+          <div class="f"><label for="cal-note-text">Observações</label><textarea id="cal-note-text" maxlength="4000" placeholder="Descreva a tarefa, lembrete ou informação importante..."></textarea></div>
+          <div class="f"><label for="cal-link-type">Vincular à operação (opcional)</label><select id="cal-link-type" onchange="calAtualizarOpcoes()"><option value="">Sem vínculo</option><option value="ordem">Ordem de serviço / entrada</option><option value="certificado">Certificado de calibração</option><option value="preventiva">Manutenção preventiva</option><option value="orcamento">Orçamento</option></select></div>
+          <div class="f" id="cal-link-ref-wrap" style="display:none"><label for="cal-link-ref">Registro relacionado</label><select id="cal-link-ref"><option value="">Selecione um registro</option></select></div>
+        </div>
+        <p class="cal-hint" id="cal-link-hint">Ao vincular uma nota, será possível abrir o registro relacionado diretamente pela agenda.</p>
+        <div class="cal-editor-actions"><button type="button" class="btn" onclick="calSalvar()">Salvar nota</button><button type="button" class="btn btn-o" onclick="calNovo()">Limpar</button></div>
+      </div>
+    </div>
+  </section>
   <div class="card">
     <div class="top pad" style="margin:0;padding-bottom:0"><h3>Últimos certificados emitidos</h3><button class="btn btn-s btn-o" onclick="switchTab('equipamentos')">Ver todos</button></div>
     <table><thead><tr><th>Certificado</th><th>Instrumento</th><th>Cliente</th><th>Calibração</th><th>Validade</th><th>Status</th><th></th></tr></thead><tbody id="dash-body"></tbody></table>
@@ -627,9 +732,10 @@ let clientesBD=[];
 let padroesBD=[];
 let procBD=[];
 let certificadosBD=[];
+let calendarioBD=[];
 const LS='metrologia_v2';
 function persistir(){
-  try{localStorage.setItem(LS,JSON.stringify({c:certificadosBD,p:padroesBD,cl:clientesBD,pr:procBD,o:orcBD,os:osBD,pv:prevBD}));return true}
+  try{localStorage.setItem(LS,JSON.stringify({c:certificadosBD,p:padroesBD,cl:clientesBD,pr:procBD,o:orcBD,os:osBD,pv:prevBD,ca:calendarioBD}));return true}
   catch(e){toast('Não foi possível salvar no navegador. Exporte um backup ou libere espaço.',5000);return false}
 }
 function limparNomeDemonstracao(v,nomeDemo){
@@ -655,7 +761,7 @@ function removerDadosDemonstracao(forcar=false){
   try{localStorage.setItem('metrologia_demo_cleaned_v1','1')}catch(e){}
 }
 function normalizarIdsDaBase(){
-  const colecoes=[certificadosBD,padroesBD,clientesBD,procBD,orcBD,osBD,prevBD];
+  const colecoes=[certificadosBD,padroesBD,clientesBD,procBD,orcBD,osBD,prevBD,calendarioBD];
   for(const lista of colecoes){const vistos=new Set();for(const item of lista){if(!item||typeof item!=='object'||Array.isArray(item))continue;let id=item.id;let n=typeof id==='number'?id:(typeof id==='string'&&/^\d{1,16}$/.test(id)?Number(id):NaN);if(!Number.isSafeInteger(n)||n<0||vistos.has(n)){n=uid();while(vistos.has(n))n++}item.id=n;vistos.add(n)}}
 }
 function carregar(){
@@ -669,6 +775,7 @@ function carregar(){
       if(Array.isArray(d.o))orcBD=d.o;
       if(Array.isArray(d.os))osBD=d.os;
       if(Array.isArray(d.pv))prevBD=d.pv;
+      if(Array.isArray(d.ca))calendarioBD=d.ca;
     }
   }catch(e){toast('Os dados locais não puderam ser lidos. Inicie com um backup válido.',5000)}
   padroesBD.forEach(p=>(p.faixas||[]).forEach(f=>f.area=areaCanon(f.area)));
@@ -687,7 +794,7 @@ function initSystem(){
   cfgCarregar();carregar();montar();montarConfig();montarOperacao();montarMenu();aplicarCfg();atualizarSelects();limparForm();
   window.__ult=CFG.ultimo;CFG.ultimo=Date.now();cfgSalvar();
   const h=new Date().getHours(),n=(CFG.nome||'').split(' ')[0];$('sp-hi').textContent=(h<12?'Bom dia':h<18?'Boa tarde':'Boa noite')+(n?', '+n:'');
-  switchTab('dashboard');botInit();
+  switchTab('dashboard');botInit();calAtualizarOpcoes();
   setTimeout(()=>{$('splash').classList.add('out');document.querySelector('aside .logo-slot').innerHTML=`<img src="${logoSrc(true)}" alt="Logo">`;setTimeout(()=>$('splash').remove(),700)},3300);
 }
 function montar(){
@@ -839,7 +946,7 @@ function certHTML(c){
    sc('5. CONDIÇÕES AMBIENTAIS')+`<table><thead><tr><th>Grandeza</th><th>Inicial</th><th>Final</th></tr></thead><tbody>${ar('t','Temperatura','°C','Temperatura')}${ar('u','Umidade','% RH','Umidade relativa')}${(c.pi||c.pf)?ar('p','Pressão','hPa','Pressão atmosférica'):''}</tbody></table>`+lgd([['Valores','(valor corrigido ± incerteza) conforme o padrão de cada grandeza']])));
   FXS.forEach(({f,R},i)=>{
     const un=esc(f.un||''),hs=R.pts.some(p=>p.h>0),dr=f.area==='Pressão'&&(f.sentido||'').startsWith('Avan');
-    const rows=R.pts.map(p=>`<tr><td>${esc(p.refTxt)}</td><td>${fx(p.mean,p.dd)}</td><td>${fx(p.Xpad,p.dd)}</td><td>${sg(p.E,p.dd)}</td><td>${fx(p.s,p.dd+1)}</td>${hs?`<td>${fx(p.h,p.dd+1)}</td>`:''}<td>${fx(p.U,p.d)}</td><td>${p.k.toFixed(2)}</td><td>${isFinite(p.veff)?Math.floor(p.veff):'inf'}</td></tr>`).join('');
+    const rows=R.pts.map(p=>`<tr><td>${esc(p.refTxt)}</td><td>${fx(p.mean,p.dd)}</td><td>${fx(p.Xpad,p.dd)}</td><td>${fx(p.E,p.dd)}</td><td>${fx(p.s,p.dd+1)}</td>${hs?`<td>${fx(p.h,p.dd+1)}</td>`:''}<td>${fx(p.U,p.d)}</td><td>${p.k.toFixed(2)}</td><td>${isFinite(p.veff)?Math.floor(p.veff):'inf'}</td></tr>`).join('');
     const leg=[['Referência',`ponto calibrado (${un})`],['Média das leituras','média calculada das leituras registradas; os dados brutos permanecem no registro interno'],['Valor corrigido','padrão corrigido pelo(s) certificado(s) utilizado(s)'],['Erro (E)','indicação − valor corrigido'],['s (repetitividade)','desvio-padrão experimental das leituras repetidas do ponto'],...(hs?[['h (histerese)','diferença entre as médias de avanço e recuo']]:[]),['UE','incerteza expandida'],['k','fator de abrangência (≈95%)'],['veff','graus de liberdade efetivos']];
     const crit=R.pts.map(p=>`<tr><td>${esc(p.refTxt)}</td><td>${isNaN(p.T)?'—':'±'+fx(p.T,p.dd+1)}</td><td>${fx(Math.abs(p.E),p.dd)}</td><td>${fx(p.U,p.d)}</td><td class="${p.dec==='Aceito'?'ok2':p.dec==='Rejeitado'?'no2':''}">${p.dec}</td></tr>`).join('');
     const exc=R.exc.length?sc('EXCENTRICIDADE')+`<table><thead><tr><th>Carga</th><th>Centro</th><th>Sup. esq.</th><th>Sup. dir.</th><th>Inf. esq.</th><th>Inf. dir.</th><th>Δ máx.</th></tr></thead><tbody>${R.exc.map(e=>`<tr><td>${esc(e.ref)}</td><td>${esc(e.c)}</td>${['se','sd','ie','id'].map((k,j)=>`<td>${esc(e[k])} (${sg(e.dl[j],4)})</td>`).join('')}<td>${fx(e.max,4)}</td></tr>`).join('')}</tbody></table>`+lgd([['Valores','leitura em cada posição (diferença em relação ao centro)'],['Δ máx.','maior diferença absoluta em relação ao centro']]):'';
@@ -1340,13 +1447,13 @@ function sigInit(){
   c.onpointerup=()=>{d=false;CFG.assin=c.toDataURL('image/png');if(cfgSalvar()){cfgPrev();confirmarAcao('Configurações','atualizadas',{'Item':'Assinatura do responsável','Origem':'Desenhada no painel'})}};
 }
 function sigLimpar(){$('sig').getContext('2d').clearRect(0,0,520,160);cfgRem('assin')}
-function cfgExport(){baixarArq(new Blob([JSON.stringify({certificados:certificadosBD,padroes:padroesBD,clientes:clientesBD,procedimentos:procBD,orcamentos:orcBD,ordens:osBD,preventivas:prevBD,config:CFG},null,1)],{type:'application/json'}),`backup_metrologia_${hoje()}.json`)}
+function cfgExport(){baixarArq(new Blob([JSON.stringify({certificados:certificadosBD,padroes:padroesBD,clientes:clientesBD,procedimentos:procBD,orcamentos:orcBD,ordens:osBD,preventivas:prevBD,calendario:calendarioBD,config:CFG},null,1)],{type:'application/json'}),`backup_metrologia_${hoje()}.json`)}
 function validarBackupImportado(d){
   if(!d||typeof d!=='object'||Array.isArray(d))throw new Error('O backup deve conter um objeto JSON.');
-  const mapa={certificados:'certificados',padroes:'padroes',clientes:'clientes',procedimentos:'procedimentos',orcamentos:'orcamentos',ordens:'ordens',preventivas:'preventivas'};
+  const mapa={certificados:'certificados',padroes:'padroes',clientes:'clientes',procedimentos:'procedimentos',orcamentos:'orcamentos',ordens:'ordens',preventivas:'preventivas',calendario:'calendario'};
   let total=0;
   for(const [chave,nome] of Object.entries(mapa)){
-    const arr=d[chave]===undefined&&['orcamentos','ordens','preventivas'].includes(chave)?[]:d[chave];
+    const arr=d[chave]===undefined&&['orcamentos','ordens','preventivas','calendario'].includes(chave)?[]:d[chave];
     if(!Array.isArray(arr))throw new Error('A lista "'+nome+'" tem formato inválido.');
     if(arr.length>10000)throw new Error('A lista "'+nome+'" excede o limite de 10.000 registros.');
     for(const item of arr)if(!item||typeof item!=='object'||Array.isArray(item))throw new Error('Há um registro inválido em "'+nome+'".');
@@ -1365,7 +1472,7 @@ function validarBackupImportado(d){
   percorrer(d);
   return d;
 }
-function cfgImport(inp){const f=inp.files[0];if(!f)return;if(f.size>25*1024*1024){alert('O backup excede o limite de 25 MB.');inp.value='';return}f.text().then(t=>{let anterior;try{const d=validarBackupImportado(JSON.parse(t));if(!Array.isArray(d.certificados)||!Array.isArray(d.padroes)||!Array.isArray(d.clientes)||!Array.isArray(d.procedimentos))throw new Error('Estrutura de backup incompleta');anterior={c:certificadosBD,p:padroesBD,cl:clientesBD,pr:procBD,o:orcBD,os:osBD,pv:prevBD,cfg:{...CFG}};certificadosBD=d.certificados;padroesBD=d.padroes;clientesBD=d.clientes;procBD=d.procedimentos;orcBD=Array.isArray(d.orcamentos)?d.orcamentos:[];osBD=Array.isArray(d.ordens)?d.ordens:[];prevBD=Array.isArray(d.preventivas)?d.preventivas:[];safeAssignConfig(d.config||{});normalizarIdsDaBase();removerDadosDemonstracao(true);if(!persistir())throw new Error('Não foi possível gravar os dados importados neste navegador.');if(!cfgSalvar()){certificadosBD=anterior.c;padroesBD=anterior.p;clientesBD=anterior.cl;procBD=anterior.pr;orcBD=anterior.o;osBD=anterior.os;prevBD=anterior.pv;safeAssignConfig(anterior.cfg);persistir();cfgSalvar();return}atualizarSelects();renderPadroes();renderClientes();renderProcs();renderBiblioteca();renderDashboard();renderOrc();renderOS();renderProd();renderPrev();cfgPreencher();aplicarCfg();confirmarAcao('Backup','importado e aplicado',{'Certificados':certificadosBD.length,'Padrões':padroesBD.length,'Clientes':clientesBD.length,'Procedimentos':procBD.length,'Orçamentos':orcBD.length,'Ordens de serviço/entrada':osBD.length,'Manutenções preventivas':prevBD.length,'Arquivo':f.name,'Observação':'Registros demonstrativos removidos. Arquivos PDF armazenados separadamente no navegador podem exigir novo anexo.'})}catch(e){if(anterior){certificadosBD=anterior.c;padroesBD=anterior.p;clientesBD=anterior.cl;procBD=anterior.pr;orcBD=anterior.o;osBD=anterior.os;prevBD=anterior.pv;safeAssignConfig(anterior.cfg);persistir();cfgSalvar()}alert('Arquivo de backup inválido ou incompleto: '+e.message)}finally{inp.value=''}})}
+function cfgImport(inp){const f=inp.files[0];if(!f)return;if(f.size>25*1024*1024){alert('O backup excede o limite de 25 MB.');inp.value='';return}f.text().then(t=>{let anterior;try{const d=validarBackupImportado(JSON.parse(t));if(!Array.isArray(d.certificados)||!Array.isArray(d.padroes)||!Array.isArray(d.clientes)||!Array.isArray(d.procedimentos))throw new Error('Estrutura de backup incompleta');anterior={c:certificadosBD,p:padroesBD,cl:clientesBD,pr:procBD,o:orcBD,os:osBD,pv:prevBD,ca:calendarioBD,cfg:{...CFG}};certificadosBD=d.certificados;padroesBD=d.padroes;clientesBD=d.clientes;procBD=d.procedimentos;orcBD=Array.isArray(d.orcamentos)?d.orcamentos:[];osBD=Array.isArray(d.ordens)?d.ordens:[];prevBD=Array.isArray(d.preventivas)?d.preventivas:[];calendarioBD=Array.isArray(d.calendario)?d.calendario:[];safeAssignConfig(d.config||{});normalizarIdsDaBase();removerDadosDemonstracao(true);if(!persistir())throw new Error('Não foi possível gravar os dados importados neste navegador.');if(!cfgSalvar()){certificadosBD=anterior.c;padroesBD=anterior.p;clientesBD=anterior.cl;procBD=anterior.pr;orcBD=anterior.o;osBD=anterior.os;prevBD=anterior.pv;calendarioBD=anterior.ca;safeAssignConfig(anterior.cfg);persistir();cfgSalvar();return}atualizarSelects();renderPadroes();renderClientes();renderProcs();renderBiblioteca();renderDashboard();renderOrc();renderOS();renderProd();renderPrev();cfgPreencher();aplicarCfg();confirmarAcao('Backup','importado e aplicado',{'Certificados':certificadosBD.length,'Padrões':padroesBD.length,'Clientes':clientesBD.length,'Procedimentos':procBD.length,'Orçamentos':orcBD.length,'Ordens de serviço/entrada':osBD.length,'Manutenções preventivas':prevBD.length,'Notas da agenda':calendarioBD.length,'Arquivo':f.name,'Observação':'Registros demonstrativos removidos. Arquivos PDF armazenados separadamente no navegador podem exigir novo anexo.'})}catch(e){if(anterior){certificadosBD=anterior.c;padroesBD=anterior.p;clientesBD=anterior.cl;procBD=anterior.pr;orcBD=anterior.o;osBD=anterior.os;prevBD=anterior.pv;calendarioBD=anterior.ca;safeAssignConfig(anterior.cfg);persistir();cfgSalvar()}alert('Arquivo de backup inválido ou incompleto: '+e.message)}finally{inp.value=''}})}
 function cfgReset(){if(confirm('Apagar os dados deste portal neste navegador? Faça um backup antes: esta ação remove certificados, padrões, clientes, procedimentos, ordens, preventivas e configurações.')){localStorage.removeItem(LS);localStorage.removeItem(CK);try{indexedDB.deleteDatabase('metrologia_files')}catch(e){}location.reload()}}
 
 /* ---------- ASSISTENTE (chatbot local, consulta os dados do portal) ---------- */
@@ -1421,6 +1528,93 @@ function renderBoas(){
   const nome=(CFG.nome||'').trim().split(/\s+/)[0];
   $('boas').innerHTML=`<div class="welcome-copy"><h2>${g}${nome?', '+esc(nome):''}!</h2></div>`;
 }
+/* ---------- AGENDA OPERACIONAL: notas por dia e vínculo com registros ---------- */
+let CAL_DAY=hoje();
+let CAL_MONTH=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+const CAL_MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const calKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const calParse=s=>{const [y,m,d]=String(s||hoje()).split('-').map(Number);return new Date(y,(m||1)-1,d||1,12)};
+const calData=()=>calendarioBD.filter(n=>n&&n.data===CAL_DAY).sort((a,b)=>(a.criado||0)-(b.criado||0));
+function calOperacoes(tipo){
+  if(tipo==='ordem')return osBD.map(o=>({id:o.id,label:`${o.num||'Ordem'} · ${(o.eqs||[])[0]?.eq||o.tipo||'Operação'} · ${cliNome(o.cliente)}`}));
+  if(tipo==='certificado')return certificadosBD.map(c=>({id:c.id,label:`${c.num||'Certificado'} · ${c.equip||c.tag||'Instrumento'} · ${cliNome(c.cliente)}`}));
+  if(tipo==='preventiva')return prevBD.map(r=>({id:r.id,label:`${r.num||'Preventiva'} · ${r.equip||'Equipamento'} · ${cliNome(r.cliente)}`}));
+  if(tipo==='orcamento')return orcBD.map(o=>({id:o.id,label:`${o.num||'Orçamento'} · ${cliNome(o.cliente)} · ${o.status||'Sem status'}`}));
+  return [];
+}
+function calAtualizarOpcoes(valor=''){
+  const tipo=$('cal-link-type')?.value||'',wrap=$('cal-link-ref-wrap'),sel=$('cal-link-ref'),hint=$('cal-link-hint');
+  if(!wrap||!sel)return;
+  const ops=calOperacoes(tipo);wrap.style.display=tipo?'':'none';
+  sel.innerHTML='<option value="">Selecione um registro</option>'+ops.map(o=>`<option value="${esc(o.id)}">${esc(o.label)}</option>`).join('');
+  if(valor!==undefined&&valor!==null&&valor!=='')sel.value=String(valor);
+  const nomes={ordem:'ordens de serviço/entrada',certificado:'certificados',preventiva:'manutenções preventivas',orcamento:'orçamentos'};
+  hint.textContent=!tipo?'Ao vincular uma nota, será possível abrir o registro relacionado diretamente pela agenda.':ops.length?`Escolha um dos ${ops.length} ${nomes[tipo]} cadastrados. O vínculo acompanha o registro operacional.`:`Ainda não há ${nomes[tipo]} cadastrados. Você pode salvar a nota sem vínculo e associar depois.`;
+}
+function calRender(){
+  const grid=$('cal-grid');if(!grid)return;
+  const y=CAL_MONTH.getFullYear(),m=CAL_MONTH.getMonth(),first=new Date(y,m,1,12),last=new Date(y,m+1,0,12);
+  $('cal-month-title').textContent=`${CAL_MES[m]} ${y}`;
+  $('cal-selected-title').textContent=calParse(CAL_DAY).toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
+  $('cal-selected-sub').textContent=CAL_DAY===hoje()?'Hoje · notas e operações vinculadas':'Notas e operações vinculadas';
+  const byDate=calendarioBD.reduce((acc,n)=>{if(n&&n.data)(acc[n.data]??=[]).push(n);return acc},{});
+  const offset=(first.getDay()+6)%7,cells=[];
+  for(let i=0;i<42;i++){
+    const day=i-offset+1;
+    if(day<1||day>last.getDate()){cells.push('<div class="cal-blank" aria-hidden="true"></div>');continue}
+    const d=new Date(y,m,day,12),key=calKey(d),events=byDate[key]||[],classes=['cal-day'];
+    if(key===hoje())classes.push('today');if(key===CAL_DAY)classes.push('selected');
+    const dots=events.length?`<span class="day-events">${Array.from({length:Math.min(events.length,3)},()=>'<i></i>').join('')}</span><span class="day-count">${events.length} ${events.length===1?'nota':'notas'}</span>`:'<span class="day-events"></span><span class="day-count">&nbsp;</span>';
+    cells.push(`<button type="button" role="gridcell" aria-label="${day} de ${CAL_MES[m]}, ${y}${events.length?`, ${events.length} notas`:''}" aria-pressed="${key===CAL_DAY}" class="${classes.join(' ')}" onclick="calSelecionarDia('${key}')"><span class="day-n">${day}</span>${dots}</button>`);
+  }
+  grid.innerHTML=cells.join('');
+  const nMes=calendarioBD.filter(n=>n&&String(n.data||'').slice(0,7)===`${y}-${String(m+1).padStart(2,'0')}`).length;
+  $('cal-month-summary').textContent=`${nMes} ${nMes===1?'registro neste mês':'registros neste mês'}`;
+  const notas=calData();
+  $('cal-note-list').innerHTML=notas.length?notas.map(n=>{
+    const link=calRotuloVinculo(n);
+    return `<article class="cal-note"><div class="cal-note-top"><div class="cal-note-title">${esc(n.titulo||'Nota sem título')}</div></div>${n.texto?`<div class="cal-note-text">${esc(n.texto)}</div>`:''}${link?`<div class="cal-note-link">↳ ${esc(link.label)}</div>`:''}<div class="cal-note-actions"><button type="button" class="btn btn-o" onclick="calEditar(${Number(n.id)})">Editar nota</button>${link&&link.exists?`<button type="button" class="btn" onclick="calAbrirVinculo(${Number(n.id)})">Abrir operação</button>`:''}<button type="button" class="btn btn-d" onclick="calExcluir(${Number(n.id)})">Excluir</button></div></article>`
+  }).join(''):'<div class="cal-note-empty">Nenhuma nota para este dia.<br>Use <b>+ Nova nota</b> para registrar uma tarefa, prazo ou lembrete.</div>';
+}
+function calRotuloVinculo(n){
+  if(!n||!n.linkType||n.linkId===undefined||n.linkId===null||n.linkId==='')return null;
+  const tipo=n.linkType,id=String(n.linkId),obj=tipo==='ordem'?osBD.find(x=>String(x.id)===id):tipo==='certificado'?certificadosBD.find(x=>String(x.id)===id):tipo==='preventiva'?prevBD.find(x=>String(x.id)===id):tipo==='orcamento'?orcBD.find(x=>String(x.id)===id):null;
+  const label=obj?(obj.num||'Registro')+(tipo==='certificado'?` · ${obj.equip||obj.tag||''}`:tipo==='ordem'?` · ${(obj.eqs||[])[0]?.eq||obj.tipo||''}`:tipo==='preventiva'?` · ${obj.equip||''}`:` · ${cliNome(obj.cliente)}`):'Registro relacionado não localizado';
+  return {label,exists:!!obj};
+}
+function calFormularioSujo(){return !!(val('cal-note-title')||val('cal-note-text')||val('cal-note-id'))}
+function calSelecionarDia(data){
+  if(data===CAL_DAY)return;
+  if(calFormularioSujo()&&!confirm('Há uma nota não salva ou em edição. Deseja descartar as alterações e mudar de dia?'))return;
+  CAL_DAY=data;const d=calParse(data);CAL_MONTH=new Date(d.getFullYear(),d.getMonth(),1);calNovo();calRender();
+}
+function calMoverMes(delta){
+  if(calFormularioSujo()&&!confirm('Há uma nota não salva ou em edição. Deseja descartar as alterações e mudar de mês?'))return;
+  CAL_MONTH=new Date(CAL_MONTH.getFullYear(),CAL_MONTH.getMonth()+delta,1,12);
+  const dia=calParse(CAL_DAY).getDate(),ultimo=new Date(CAL_MONTH.getFullYear(),CAL_MONTH.getMonth()+1,0).getDate();
+  CAL_DAY=calKey(new Date(CAL_MONTH.getFullYear(),CAL_MONTH.getMonth(),Math.min(dia,ultimo),12));calNovo();calRender();
+}
+function calIrHoje(){if(calFormularioSujo()&&!confirm('Há uma nota não salva ou em edição. Deseja descartar as alterações e ir para hoje?'))return;CAL_DAY=hoje();const d=calParse(CAL_DAY);CAL_MONTH=new Date(d.getFullYear(),d.getMonth(),1);calNovo();calRender()}
+function calNovo(){set('cal-note-id','');set('cal-note-title','');set('cal-note-text','');set('cal-link-type','');calAtualizarOpcoes();$('cal-editor-heading').textContent='Adicionar nota';}
+function calEditar(id){const n=calendarioBD.find(x=>String(x.id)===String(id));if(!n)return;set('cal-note-id',n.id);set('cal-note-title',n.titulo||'');set('cal-note-text',n.texto||'');set('cal-link-type',n.linkType||'');calAtualizarOpcoes(n.linkId??'');$('cal-editor-heading').textContent='Editar nota';$('cal-note-title').focus()}
+function calSalvar(){
+  const titulo=val('cal-note-title');if(!titulo)return alert('Informe um título para a nota.');
+  const id=val('cal-note-id'),linkType=val('cal-link-type'),linkId=linkType?val('cal-link-ref'):'';
+  const payload={data:CAL_DAY,titulo,texto:val('cal-note-text'),linkType:linkId?linkType:'',linkId:linkId||'',atualizado:new Date().toISOString()};
+  let nota;
+  if(id){nota=calendarioBD.find(x=>String(x.id)===String(id));if(!nota)return alert('Esta nota não foi encontrada.');Object.assign(nota,payload)}
+  else{nota={id:uid(),...payload,criado:Date.now()};calendarioBD.push(nota)}
+  if(!persistir())return;
+  calNovo();calRender();toast('Nota salva na agenda.',2500);
+}
+function calExcluir(id){const n=calendarioBD.find(x=>String(x.id)===String(id));if(!n||!confirm(`Excluir a nota "${n.titulo||'sem título'}"?`))return;calendarioBD=calendarioBD.filter(x=>String(x.id)!==String(id));if(!persistir())return;calNovo();calRender();toast('Nota removida da agenda.',2500)}
+function calAbrirVinculo(id){
+  const n=calendarioBD.find(x=>String(x.id)===String(id));if(!n)return;
+  const op=n.linkType==='ordem'?osBD.find(x=>String(x.id)===String(n.linkId)):n.linkType==='certificado'?certificadosBD.find(x=>String(x.id)===String(n.linkId)):n.linkType==='preventiva'?prevBD.find(x=>String(x.id)===String(n.linkId)):n.linkType==='orcamento'?orcBD.find(x=>String(x.id)===String(n.linkId)):null;
+  if(!op){toast('O registro relacionado não está mais disponível.',3000);return}
+  if(n.linkType==='ordem')editarOS(op.id);else if(n.linkType==='certificado')visualizar(op.id);else if(n.linkType==='preventiva')editarPrev(op.id);else if(n.linkType==='orcamento')editarOrc(op.id);
+}
+
 function renderDashboard(){
   const t=certificadosBD.length,n=k=>certificadosBD.filter(c=>c.status===k).length,h=hoje(),lim=somaDias(h,30);
   const kpi=(l,v,segs,cor,fil)=>`<div class="kpi" onclick="filtrarStatus('${fil}')">${donut(segs,t)}<div><div class="n" style="color:${cor}" data-n="${v}">0</div><div class="l">${l}</div><div class="p">${t?Math.round(v/t*100):0}% do total</div></div></div>`;
@@ -1438,6 +1632,7 @@ function renderDashboard(){
   $('charts').innerHTML=`<div class="card pad"><div class="top" style="margin-bottom:4px"><h3>Produtividade do laboratório</h3><div class="seg">${[['emissoes','Emissões'],['equipe','Equipe'],['areas','Áreas'],['producao','Produção']].map(([k,l])=>`<button class="${k===DM?'on':''}" onclick="DM='${k}';renderDashboard()">${l}</button>`).join('')}</div></div>
    <div class="pstrip">${st('Emitidos no mês',cur,prev?`${cur>=prev?'+':''}${Math.round((cur-prev)/prev*100)}% vs. mês anterior`:'mês anterior sem emissões')}${st('Ciclo médio',ciclo==null?'—':ciclo+' d','da entrada à saída das ordens')}${st('Ordens em aberto',abertas,'em produção')}${st('Taxa de aprovação',apr+rep?Math.round(apr/(apr+rep)*100)+'%':'—','aprovados / decididos')}</div>${body}</div>
    <div class="card pad"><h3>Validade das calibrações</h3>${vb('Vigentes',vig,'#16a34a')}${vb('Vencem em 30 dias',a30,'#f59e0b')}${vb('Vencidas',ven,'#dc2626')}</div>`;
+  calRender();
   $('dash-body').innerHTML=certificadosBD.slice(0,5).map(c=>{const ini=cliNome(c.cliente).split(' ').slice(0,2).map(w=>w[0]).join('');
     return `<tr><td><div class="cell"><span class="ic">${esc(c.num.slice(3,7))}</span><div><strong>${esc(c.num)}</strong><span class="sub">Emitido em ${fmt(c.emissao||c.data)}</span></div></div></td><td><strong>${esc(c.equip)}</strong><span class="sub">${esc(c.tag)} | ${esc(c.fabricante)}</span></td><td><div class="cell"><span class="av">${esc(ini)}</span>${esc(cliNome(c.cliente))}</div></td><td>${fmt(c.data)}</td><td class="${venceu(c)?'venc':''}">${c.validade?fmt(c.validade):'Sem validade'}</td><td>${badge(c.status)}</td><td><button class="btn btn-s btn-o" onclick="visualizar(${c.id})">Ver</button></td></tr>`}).join('')||'<tr><td colspan="7" class="empty">Nenhum certificado emitido.</td></tr>';
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
